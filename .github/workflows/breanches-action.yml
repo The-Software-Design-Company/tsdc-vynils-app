@@ -8,6 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: fwilhe2/setup-kotlin@main
+      - uses: actions/setup-java@v3
+        with:
+            distribution: 'temurin' # See 'Supported distributions' for available options
+            java-version: '17'
       - name: Generate build number
         run: echo "The build number $GITHUB_RUN_NUMBER 🏗"
       - name: Test 🧪
