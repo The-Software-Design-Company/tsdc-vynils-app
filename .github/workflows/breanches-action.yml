@@ -1,0 +1,16 @@
+name: Android ci 📱🤖
+on:
+    push:
+      branches: [feature/*, bugfix/*]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: fwilhe2/setup-kotlin@main
+      - name: Generate build number
+        run: echo "The build number $GITHUB_RUN_NUMBER 🏗"
+      - name: Test 🧪
+        run: make test
+      - name: build ⚙️
+        run: make build
