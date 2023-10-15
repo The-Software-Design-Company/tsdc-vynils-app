@@ -1,7 +1,11 @@
 name: Merge to Develop
 on:
-    pull_request_review:
-        types: [submitted]
+    pull_request:
+      types:
+        - edited
+      branches:
+        - 'bugfix/*'
+        - 'feature/*'
 jobs:
   merge-from-develop:
     if: github.event.review.state == 'approved'
