@@ -1,4 +1,4 @@
-name: Android ci 📱🤖
+name: Android ci from a branch 📱🤖
 on:
     push:
       branches: [feature/*, bugfix/*]
