@@ -1,4 +1,4 @@
-package com.example.tsdc_vynils_app
+package com.tsdc_vynils_app.app
 
 import org.junit.Test
 
