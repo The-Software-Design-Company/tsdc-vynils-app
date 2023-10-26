@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "tsdc-vynils-app"
 include(":app")
+ 
