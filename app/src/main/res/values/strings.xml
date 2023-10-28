@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">tsdc-vynils-app</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">Vinilos</string>
+    <string name="title_albumes">Álbumes</string>
+    <string name="title_artistas">Artistas</string>
+    <string name="title_coleccionistas">Coleccionistas</string>
+    <string name="great">Hola</string>
+    <string name="newAlbum">Nuevo Álbum > </string>
+    <string name="allAlbums">Todos los Álbumes </string>
 </resources>
