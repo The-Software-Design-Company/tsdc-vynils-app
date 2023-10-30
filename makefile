@@ -25,3 +25,7 @@ build-app:
 
 test:
 	./gradlew test
+
+build-ci:
+	./gradlew :app:clean
+	./gradlew assembleDebug

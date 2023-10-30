@@ -80,7 +80,7 @@ jobs:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '17'
     - name: build ⚙️
-      run: make build-app
+      run: make build-ci
     - name: Validate results with errors
       if: ${{ failure() }}
       env:
