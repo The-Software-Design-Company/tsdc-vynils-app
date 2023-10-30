@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.tsdc_vynils_app.app.R
 import com.tsdc_vynils_app.app.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -27,6 +28,8 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        root.setBackgroundColor(resources.getColor(R.color.black))
 
         val textView: TextView = binding.textDashboard
         dashboardViewModel.text.observe(viewLifecycleOwner) {
