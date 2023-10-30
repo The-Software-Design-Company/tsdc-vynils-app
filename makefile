@@ -11,16 +11,17 @@ endif
 	adb shell am start -n "com.tsdc_vynils_app.app/com.tsdc_vynils_app.app.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER
 
 run-device:
-	make build
+	make build-app
 	sleep 10
-	adb -d install app/build/outputs/apk/debug/app-debug.apk
 	adb shell am start -n "com.tsdc_vynils_app.app/com.tsdc_vynils_app.app.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER --splashscreen-show-icon 
 
 list-emulator:
 	emulator -list-avds
 
-build:
-	./gradlew :app:clean :app:assembleDebug
+build-app:
+	./gradlew :app:clean
+	./gradlew assembleDebug
+	./gradlew installDebug
 
 test:
 	./gradlew test
