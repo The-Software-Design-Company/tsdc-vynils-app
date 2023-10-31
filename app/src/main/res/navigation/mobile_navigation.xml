@@ -11,8 +11,8 @@
         android:label="@string/title_albumes"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_navigation_home_to_navigate_albumDetails"
-            app:destination="@id/navigate_albumDetails" />
+            android:id="@+id/action_navigation_home_to_navigation_album_details"
+            app:destination="@id/navigation_album_details" />
     </fragment>
 
     <fragment
@@ -26,13 +26,13 @@
         android:name="com.tsdc_vynils_app.app.ui.notifications.NotificationsFragment"
         android:label="@string/title_coleccionistas"
         tools:layout="@layout/fragment_notifications" />
-    <fragment
-        android:id="@+id/navigate_albumDetails"
-        android:name="com.tsdc_vynils_app.app.ui.albumDetails.AlbumDetailsFragment"
+    <activity
+        android:id="@+id/navigation_album_details"
+        android:name="com.tsdc_vynils_app.app.ui.albumDetails.AlbumDetailsActivity"
         android:label="@string/title_album_details"
-        tools:layout="@layout/fragment_album_details" >
+        tools:layout="@layout/activity_album_details" >
         <argument
             android:name="albumId"
             app:argType="integer" />
-    </fragment>
+    </activity>
 </navigation>

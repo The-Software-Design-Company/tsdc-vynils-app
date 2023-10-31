@@ -7,4 +7,5 @@
     <string name="newAlbum">Nuevo Álbum > </string>
     <string name="allAlbums">Todos los Álbumes </string>
     <string name="title_album_details">Detalle de álbum</string>
+    <string name="title_activity_album_details">AlbumDetailsActivity</string>
 </resources>

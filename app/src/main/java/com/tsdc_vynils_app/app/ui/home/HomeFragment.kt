@@ -102,7 +102,7 @@ class HomeFragment : Fragment() {
                 imageSizeInPixels
             )
             albumImageView.setOnClickListener {
-                val action = R.id.action_navigation_home_to_navigate_albumDetails
+                val action = R.id.action_navigation_home_to_navigation_album_details
                 albumImageView.findNavController().navigate(action)
             }
             Picasso.get().load(imageUrl).into(albumImageView)

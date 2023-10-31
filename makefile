@@ -1,6 +1,6 @@
 DEFAULT_EMULATOR_DEVICE = Pixel_3a_XL_API_32
 run-emulator:
-	make build
+	make build-app
 ifeq ($(strip $(device)),)
 	nohup emulator -avd ${DEFAULT_EMULATOR_DEVICE} &
 else
@@ -21,7 +21,6 @@ list-emulator:
 build-app:
 	./gradlew :app:clean
 	./gradlew assembleDebug
-	./gradlew installDebug
 
 test:
 	./gradlew test
