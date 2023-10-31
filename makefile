@@ -1,6 +1,6 @@
 DEFAULT_EMULATOR_DEVICE = Pixel_3a_XL_API_32
 run-emulator:
-	make build
+	make build-app
 ifeq ($(strip $(device)),)
 	nohup emulator -avd ${DEFAULT_EMULATOR_DEVICE} &
 else
@@ -11,16 +11,20 @@ endif
 	adb shell am start -n "com.tsdc_vynils_app.app/com.tsdc_vynils_app.app.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER
 
 run-device:
-	make build
+	make build-app
 	sleep 10
-	adb -d install app/build/outputs/apk/debug/app-debug.apk
 	adb shell am start -n "com.tsdc_vynils_app.app/com.tsdc_vynils_app.app.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER --splashscreen-show-icon 
 
 list-emulator:
 	emulator -list-avds
 
-build:
-	./gradlew :app:clean :app:assembleDebug
+build-app:
+	./gradlew :app:clean
+	./gradlew assembleDebug
 
 test:
 	./gradlew test
+
+build-ci:
+	./gradlew :app:clean
+	./gradlew assembleDebug

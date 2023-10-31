@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.tsdc_vynils_app.app.ui.home.HomeFragment"
         android:label="@string/title_albumes"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_album_details"
+            app:destination="@id/navigation_album_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +26,13 @@
         android:name="com.tsdc_vynils_app.app.ui.notifications.NotificationsFragment"
         android:label="@string/title_coleccionistas"
         tools:layout="@layout/fragment_notifications" />
+    <activity
+        android:id="@+id/navigation_album_details"
+        android:name="com.tsdc_vynils_app.app.ui.albumDetails.AlbumDetailsActivity"
+        android:label="@string/title_album_details"
+        tools:layout="@layout/activity_album_details" >
+        <argument
+            android:name="albumId"
+            app:argType="integer" />
+    </activity>
 </navigation>

@@ -1,6 +1,5 @@
 package com.tsdc_vynils_app.app.ui.home
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -11,9 +10,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.squareup.picasso.Picasso
 import com.tsdc_vynils_app.app.R
 import com.tsdc_vynils_app.app.databinding.FragmentHomeBinding
@@ -102,6 +101,10 @@ class HomeFragment : Fragment() {
                 imageSizeInPixels,
                 imageSizeInPixels
             )
+            albumImageView.setOnClickListener {
+                val action = R.id.action_navigation_home_to_navigation_album_details
+                albumImageView.findNavController().navigate(action)
+            }
             Picasso.get().load(imageUrl).into(albumImageView)
             cardLinearLayout.addView(albumImageView)
 
