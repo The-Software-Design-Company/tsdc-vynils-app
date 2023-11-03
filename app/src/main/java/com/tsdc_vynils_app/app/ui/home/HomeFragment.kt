@@ -16,6 +16,7 @@ import androidx.navigation.findNavController
 import com.squareup.picasso.Picasso
 import com.tsdc_vynils_app.app.R
 import com.tsdc_vynils_app.app.databinding.FragmentHomeBinding
+import com.tsdc_vynils_app.app.ui.viewModels.HomeViewModel
 
 class HomeFragment : Fragment() {
 
