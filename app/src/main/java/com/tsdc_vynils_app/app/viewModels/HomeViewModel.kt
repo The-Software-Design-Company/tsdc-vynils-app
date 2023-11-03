@@ -1,4 +1,4 @@
-package com.tsdc_vynils_app.app.ui.viewModels
+package com.tsdc_vynils_app.app.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
