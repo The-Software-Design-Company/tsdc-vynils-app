@@ -36,11 +36,22 @@ class AlbumDetailsActivity : AppCompatActivity() {
             this.onSupportNavigateUp()
         }
         val titleAlbum = this.findViewById<TextView>(R.id.album_details_title)
-        titleAlbum.text = "...And justice for all"
+        titleAlbum.text = "I Rise"
+
+        val artistAlbum = this.findViewById<TextView>(R.id.album_artist_name)
+        artistAlbum.text = "Etana"
+
+        val albumReleaseDate = this.findViewById<TextView>(R.id.album_release_date)
+        albumReleaseDate.text = "Octubre 28 de 2018"
+
+        val recordLabelAlbum = this.findViewById<TextView>(R.id.album_record_label)
+        recordLabelAlbum.text = "VP Music Group, Inc"
+
+        val albumGenre = this.findViewById<TextView>(R.id.album_genre)
+        albumGenre.text = "Octubre 28 de 2018"
+
         val albumDescription = this.findViewById<TextView>(R.id.album_description)
-        albumDescription.text = "Bacon ipsum dolor amet turkey turducken chuck salami, alcatra frankfurter picanha ground round pork chop biltong jowl venison brisket kevin tri-tip. Beef ribs alcatra ham hock chuck pancetta flank rump biltong chicken doner jowl. Flank spare ribs shoulder salami. Venison bacon picanha pork loin tail pork belly turkey kielbasa. Leberkas picanha swine ground round cow meatball strip steak pork loin turkey corned beef. Kielbasa shoulder sirloin chislic pork chop ribeye. T-bone shankle rump venison cow.\n" +
-                "\n" +
-                "Sirloin shank brisket pig rump pork beef ribs spare ribs drumstick. Ham hock pork belly bacon pork pork chop kevin tri-tip sirloin pastrami turkey. Meatloaf leberkas prosciutto, beef pastrami turkey salami. Ham ball tip meatball ground round. Cow pork chop chuck bresaola capicola."
+        albumDescription.text = "Buscando América es el primer álbum de la banda de Rubén Blades y Seis del Solar lanzado en 1984."
 
         val images = listOf(R.drawable.and_justice_for_all, R.drawable.and_justice_for_all, R.drawable.and_justice_for_all)
         val adapter = CarouselAdapter(images)
