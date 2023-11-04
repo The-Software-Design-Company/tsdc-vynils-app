@@ -15,6 +15,15 @@ import com.tsdc_vynils_app.app.models.Comment
 import org.json.JSONArray
 import org.json.JSONObject
 
-class AlbumServiceAdapter {
-
+class AlbumServiceAdapter constructor(context: Context) {
+    companion object{
+        const val BASE_URL= "https://vynils-back-heroku.herokuapp.com/"
+        var instance: AlbumServiceAdapter? = null
+        fun getInstance(context: Context) =
+            instance ?: synchronized(this) {
+                instance ?: AlbumServiceAdapter(context).also {
+                    instance = it
+                }
+            }
+    }
 }
