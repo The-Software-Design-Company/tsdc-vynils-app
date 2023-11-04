@@ -24,6 +24,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_API_URL", "${project.findProperty("VYNILS_BASE_API_URL_RELEASE")}")
+        }
+        debug {
+            buildConfigField("String", "BASE_API_URL", "${project.findProperty("VYNILS_BASE_API_URL_DEBUG")}")
         }
     }
     compileOptions {
@@ -35,6 +39,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     viewBinding {
