@@ -100,10 +100,14 @@ class AlbumDetailsActivity : AppCompatActivity() {
             Toast.makeText(this, "Argument is missing", Toast.LENGTH_SHORT).show()
             Log.e("TAG", "Argument is missing")
         }
-
-
-
     }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _bindingData = null
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed() // Handle the Up button click event
