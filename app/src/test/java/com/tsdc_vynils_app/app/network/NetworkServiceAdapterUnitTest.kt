@@ -10,14 +10,13 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
-import kotlinx.coroutines.delay
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 
-class NetworkServiceAdapterTest {
+class NetworkServiceAdapterUnitTest {
     @RelaxedMockK
     lateinit var networkServiceAdapter: NetworkServiceAdapter
 
@@ -76,6 +75,47 @@ class NetworkServiceAdapterTest {
         assertEquals(expectedAlbums, result)
     }
 
+    @Test
+    fun `given an album id when call the album with this id then return the specific album`() = runBlocking {
+        // Given
+        val expectedComments = listOf<Comment>()
+        val expectedTrack = listOf<Track>()
+        val expectedPerformers = listOf<Performer>()
+        val albumId = 1
+        val expectedAlbum = Album(
+            id = 1,
+            name = "Buscando América",
+            cover = "https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg",
+            releaseDate = "1984-08-01T00:00:00-05:00",
+            description = "Buscando América es el primer álbum de la banda de Rubén Blades y Seis del Solar lanzado en 1984. La producción, bajo el sello Elektra, fusiona diferentes ritmos musicales tales como la salsa, reggae, rock, y el jazz latino. El disco fue grabado en Eurosound Studios en Nueva York entre mayo y agosto de 1983.",
+            genre = "Salsa",
+            recordLabel = "Elektra",
+            comments = expectedComments,
+            tracks = expectedTrack,
+            performers = expectedPerformers
+        )
+        val errorCallback: (VolleyError) -> Unit = mockk(relaxed = true)
+
+        coEvery { networkServiceAdapter.getAlbum(albumId, any(), any()) } coAnswers {
+            val onComplete: (Album) -> Unit = arg(0)
+            onComplete(expectedAlbum)
+        }
+
+        // When
+        var result: Album? = null
+        albumRepository.refreshDataById(
+            albumId,
+            { album ->
+                result = album
+            },
+           errorCallback
+        )
+
+        // Then
+        assertEquals(expectedAlbum, result)
+        coVerify(exactly = 1) { albumRepository.refreshDataById(albumId, any(), any()) }
+
+    }
 
 
 }
