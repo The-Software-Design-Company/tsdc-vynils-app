@@ -36,6 +36,7 @@ import androidx.navigation.Navigation
 import androidx.viewpager2.adapter.FragmentViewHolder
 import com.squareup.picasso.Transformation
 import com.tsdc_vynils_app.app.models.Album
+import java.net.ConnectException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

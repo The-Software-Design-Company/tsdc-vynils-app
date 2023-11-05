@@ -56,7 +56,6 @@ class AlbumDetailsActivity : AppCompatActivity() {
 
         if (bundle != null) {
             val albumId = bundle.getInt("albumId", 0)
-            Toast.makeText(this, "${albumId.toString()}", Toast.LENGTH_SHORT).show()
             val viewModel = ViewModelProvider(this, AlbumDetailsViewModel.Factory(this.application, albumId)).get(AlbumDetailsViewModel::class.java)
             val titleAlbum = this.findViewById<TextView>(R.id.album_details_title)
             val albumReleaseDate = this.findViewById<TextView>(R.id.album_release_date)
@@ -74,9 +73,12 @@ class AlbumDetailsActivity : AppCompatActivity() {
                     albumDescription.text = data.description
                     val imageUrl = data.cover
                     val coverView = findViewById<ImageView>(R.id.album_cover)
-                    Picasso.get()
-                        .load(imageUrl)
-                        .into(coverView)
+                    if (imageUrl!="")
+                        Picasso.get()
+                            .load(imageUrl)
+                            .into(coverView)
+                    else
+                        coverView.setImageDrawable( getDrawable(R.drawable.default_image))
                     artistAlbum.text = data.performers.joinToString(",") { "${it.name} " }
 
                 }
@@ -91,7 +93,7 @@ class AlbumDetailsActivity : AppCompatActivity() {
             }
 
 
-            val images = listOf(R.drawable.and_justice_for_all, R.drawable.and_justice_for_all, R.drawable.and_justice_for_all)
+            val images = listOf(R.drawable.default_image, R.drawable.default_image, R.drawable.default_image)
             val adapter = CarouselAdapter(images)
             binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             binding.recyclerView.adapter = adapter
