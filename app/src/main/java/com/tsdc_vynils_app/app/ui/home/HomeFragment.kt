@@ -390,20 +390,4 @@ class HomeFragment : Fragment() {
     }
 }
 
-class RoundedCornersTransform(private val radiusInPx: Float) : Transformation {
-    override fun key(): String {
-        return "rounded_corners"
-    }
 
-    override fun transform(source: Bitmap): Bitmap {
-        val bitmap = Bitmap.createBitmap(source.width, source.height, source.config)
-        val canvas = Canvas(bitmap)
-        val paint = Paint()
-        paint.isAntiAlias = true
-        paint.shader = BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
-        val rectF = RectF(0f, 0f, source.width.toFloat(), source.height.toFloat())
-        canvas.drawRoundRect(rectF, radiusInPx, radiusInPx, paint)
-        source.recycle()
-        return bitmap
-    }
-}

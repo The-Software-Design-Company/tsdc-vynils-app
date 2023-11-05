@@ -73,6 +73,9 @@ dependencies {
     testImplementation ("com.squareup.okhttp3:mockwebserver:4.9.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation ("com.github.javafaker:javafaker:1.0.2")
+    testImplementation ("org.mockito:mockito-core:3.12.4")
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
 
     implementation ("com.android.volley:volley:1.2.1")
 }
