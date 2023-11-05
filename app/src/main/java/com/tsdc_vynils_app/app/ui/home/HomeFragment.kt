@@ -23,6 +23,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -31,6 +32,8 @@ import com.tsdc_vynils_app.app.R
 import com.tsdc_vynils_app.app.databinding.FragmentHomeBinding
 import com.tsdc_vynils_app.app.viewModels.HomeViewModel
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.viewpager2.adapter.FragmentViewHolder
 import com.squareup.picasso.Transformation
 import com.tsdc_vynils_app.app.models.Album
 import kotlinx.coroutines.Dispatchers
@@ -180,8 +183,9 @@ class HomeFragment : Fragment() {
                 imageSizeInPixels
             )
             albumImageView.setOnClickListener {
-                val action = R.id.action_navigation_home_to_navigation_album_details
-                albumImageView.findNavController().navigate(action) }
+                val bundle = bundleOf("albumId" to al.id)
+                albumImageView.findNavController().navigate(R.id.actionHomeFragmentToAlbumDetailsActivity, bundle)
+            }
 
 
 
@@ -289,19 +293,13 @@ class HomeFragment : Fragment() {
                         imageSizeInPixels
                     )
                     albumImageView.setOnClickListener {
-                        val action = R.id.action_navigation_home_to_navigation_album_details
-                        albumImageView.findNavController().navigate(action) }
-
-
+                        val bundle = bundleOf("albumId" to al.id)
+                        albumImageView.findNavController().navigate(R.id.actionHomeFragmentToAlbumDetailsActivity, bundle)
+                    }
 
                     Picasso.get()
                         .load(imageUrl)
                         .into(albumImageView)
-
-
-
-
-
 
                     cardLinearLayout.addView(albumImageView)
 
