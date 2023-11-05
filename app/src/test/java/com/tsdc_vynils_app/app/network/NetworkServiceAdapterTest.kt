@@ -73,7 +73,6 @@ class NetworkServiceAdapterTest {
         coVerify(exactly = 1) { albumRepository.refreshData(any(), any()) }
         assertNotNull(result)
         assertEquals(expectedAlbums, result)
-        //assertEquals(200, statusCode)
     }
 
     @Test
