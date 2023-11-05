@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -24,6 +25,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_API_URL", "${project.findProperty("VYNILS_BASE_API_URL_RELEASE")}")
+        }
+        debug {
+            buildConfigField("String", "BASE_API_URL", "${project.findProperty("VYNILS_BASE_API_URL_DEBUG")}")
         }
     }
     compileOptions {
@@ -35,6 +40,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     viewBinding {
@@ -57,6 +63,10 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("com.caverock:androidsvg:1.4")
+    implementation("com.android.volley:volley:1.2.1")
+    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.0")
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.mockk:mockk:1.12.2")

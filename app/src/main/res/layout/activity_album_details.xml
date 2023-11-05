@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ui.albumDetails.AlbumDetailsActivity">
+    tools:context=".ui.albumDetails.AlbumDetailsActivity"
+    app:navGraph="@navigation/nav_graph">
     <include
         android:id="@+id/toolbar"
         layout="@layout/vynils_toolbar" />
