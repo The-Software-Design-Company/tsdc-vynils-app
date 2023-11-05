@@ -9,11 +9,13 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.JsonRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.tsdc_vynils_app.app.models.Album
 import org.json.JSONArray
 import org.json.JSONObject
+import com.google.gson.Gson
 import com.tsdc_vynils_app.app.BuildConfig as Config
 
 class NetworkServiceAdapter constructor(context: Context) {
@@ -50,8 +52,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         requestQueue.add(
             getRequest("albums/${albumId}",
                 Response.Listener<String> { response ->
-                    val jsonResponse = JSONObject(response)
-                    val album = jsonResponse as Album
+                    val album = Gson().fromJson(response, Album::class.java)
                     onComplete(album)
                 },
                 Response.ErrorListener {
