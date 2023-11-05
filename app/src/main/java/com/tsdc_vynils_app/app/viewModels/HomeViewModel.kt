@@ -11,7 +11,7 @@ import com.tsdc_vynils_app.app.repositories.AlbumRepository
 
 class HomeViewModel(application: Application) :  AndroidViewModel(application) {
 
-    private val albumsRepository = AlbumRepository(application)
+    var albumsRepository = AlbumRepository(application)
 
     private val _albums = MutableLiveData<List<Album>>()
 
@@ -32,7 +32,7 @@ class HomeViewModel(application: Application) :  AndroidViewModel(application) {
         refreshDataFromNetwork()
     }
 
-    private fun refreshDataFromNetwork() {
+    fun refreshDataFromNetwork() {
         albumsRepository.refreshData({
             _albums.postValue(it)
             _eventNetworkError.value = false
