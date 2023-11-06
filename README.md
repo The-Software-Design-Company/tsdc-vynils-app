@@ -100,7 +100,8 @@ docker compose up --build
     docker ps
 ```
 
-**Put here the image**
+![Screenshot 2023-11-05 at 20 56 11](https://github.com/The-Software-Design-Company/tsdc-vynils-app/assets/10298615/3b1731b0-f1ff-4b15-8c5b-663f79239f99)
+
 
 7. You can try the application with the next cURL command
 
@@ -124,15 +125,15 @@ $ cd tsdc-vynils-app
 
 * You should go to the **gradle.properties** on the root of the project
 
-**Put a image**
+![Screenshot 2023-11-05 at 21 06 52](https://github.com/The-Software-Design-Company/tsdc-vynils-app/assets/10298615/949c1464-cbd8-4de3-ac12-3d178ad28054)
+
 
 * You should change the URL by the environment variable **VYNILS_BASE_API_URL_DEBUG** url **http://10.0.2.2:3000/** this is a standard ip where the emulator listen the localhost
 
 ```properties
 VYNILS_BASE_API_URL_DEBUG="http://10.0.2.2:3000/"
 ```
-
-**Put a image**
+![Screenshot 2023-11-05 at 22 11 10](https://github.com/The-Software-Design-Company/tsdc-vynils-app/assets/10298615/3f63ea9c-e218-45d1-9c9b-b13eaaec2748)
 
 4. Open the Android studio and sync gradle 🐘
 
@@ -140,7 +141,8 @@ VYNILS_BASE_API_URL_DEBUG="http://10.0.2.2:3000/"
 
 * And select "Sync project with gradle"
 
-**Put a image**
+![Screenshot 2023-11-05 at 21 02 41](https://github.com/The-Software-Design-Company/tsdc-vynils-app/assets/10298615/c2483726-2b9c-4994-a109-33e5a97865a9)
+
 
 5. Rebuild the project (recommend)
 
@@ -148,15 +150,25 @@ VYNILS_BASE_API_URL_DEBUG="http://10.0.2.2:3000/"
 
 * Click on Rebuild Project 👷🏻‍♀️
 
+![Screenshot 2023-11-05 at 21 03 14](https://github.com/The-Software-Design-Company/tsdc-vynils-app/assets/10298615/7d8692f8-dfe5-417e-9995-ab9f99b9d693)
+
+
 6. Now you can run the project
 
 * You should select your emulator or own device
 
-**Put here a image**
+![Screenshot 2023-11-05 at 21 11 56](https://github.com/The-Software-Design-Company/tsdc-vynils-app/assets/10298615/dfe8d904-3e91-4c00-ae30-aca0ee152d07)
 
-* Finally, you should run the project
+* Click un run ▶️
 
-**Put here a image**
+![Screenshot 2023-11-05 at 21 15 08](https://github.com/The-Software-Design-Company/tsdc-vynils-app/assets/10298615/5df61247-0bd2-470b-9119-e27a268fe2ee)
+
+
+* Finally, you can see the application 📱
+
+![Screenshot 2023-11-05 at 22 09 49](https://github.com/The-Software-Design-Company/tsdc-vynils-app/assets/10298615/64a813ff-56c9-4221-9d21-378e1be60465)
+
+
 
 
 
