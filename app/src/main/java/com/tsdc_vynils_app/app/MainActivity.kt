@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.itemIconTintList = iconColors
         val textColors = resources.getColorStateList(R.color.bottom_nav_text_colors)
         bottomNavigationView.itemTextColor = textColors
-        //
         supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.black)))
 
 
