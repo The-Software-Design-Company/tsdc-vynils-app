@@ -18,6 +18,31 @@ This is an application 📱 to management, review and check information about al
 
 # Run in your local machine 🖥️
 
+## Staging API
+
+# ⚠️ Important:
+* The api is deployed in heroku and the service when it isn't being used it falls asleep 😴, you need to wake the service up
+
+* Before doing any test 🧪 you need to call the healthCheck to wake the service up, this is the endpoint example
+
+```sh
+$ curl https://tsdc-vynils-staging-api-d6a4f176b374.herokuapp.com/health
+```
+
+* After that you should receive the next response:
+
+```json
+{
+    "name":"vinyls-backend-miso",
+    "version":"1.1.3",
+    "environment":"staging",
+    "status":200,
+    "uptime":177.56916666666666
+}
+```
+
+
+
 ## Run the api in local
 
 `Note: This option is if you want to run with the API in your local machine`
