@@ -1,9 +1,11 @@
 package com.tsdc_vynils_app.app.ui.artistDetails
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Paint
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import com.tsdc_vynils_app.app.R
@@ -25,6 +27,9 @@ class ArtistDetailsActivity : AppCompatActivity() {
         iconImageView.setOnClickListener {
             this.onSupportNavigateUp()
         }
+        val textCaption = findViewById<TextView>(R.id.caption_text_view)
+        textCaption.text = "Avril Lavigne"
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

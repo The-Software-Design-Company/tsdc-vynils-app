@@ -12,4 +12,5 @@
     <string name="collectors_title">Coleccionistas</string>
     <string name="musicians_title">Artistas</string>
     <string name="buscar_hint">Buscar</string>
+    <string name="secondary_artist_title">Bio</string>
 </resources>
