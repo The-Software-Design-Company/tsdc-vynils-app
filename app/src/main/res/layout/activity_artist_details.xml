@@ -10,5 +10,67 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/vynils_toolbar" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="?attr/actionBarSize"
+        android:paddingTop="5dp"
+        android:layout_gravity="center"
+        >
+        <ImageView
+            android:id="@+id/artist_photo"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="290dp"
+            android:layout_height="290dp"
+            android:src="@drawable/avril"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/caption_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textSize="18pt"
+            android:layout_marginTop="230dp"
+            android:layout_alignParentBottom="true"
+            android:text="Your Caption Here"
+            android:textColor="@android:color/white"
+            android:background="#50000000" />
+        <TextView
+            android:id="@+id/secondary_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="14pt"
+            android:layout_marginTop="290dp"
+            android:text="@string/secondary_artist_title"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="400dp"
+        >
+        <include layout="@layout/horizontal_line" />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="400dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="256dp"
+                android:id="@+id/artist_bio"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:paddingRight="5dp"
+                android:layout_height="wrap_content"
+                android:text="Bacon ipsum dolor amet corned beef kielbasa tail biltong fatback. Doner cupim prosciutto, filet mignon short ribs shoulder capicola pork loin spare ribs beef ribs bacon beef. Tail ground round alcatra rump ribeye pork belly shankle tri-tip salami shoulder buffalo cow leberkas. Andouille sausage leberkas flank bacon brisket tail landjaeger pig. Pastrami spare ribs kielbasa pig swine, ball tip jowl strip steak picanha beef ribs burgdoggen bresaola landjaeger. Pastrami chuck bresaola, doner ground round salami pork loin corned beef frankfurter filet mignon flank cow. Shank salami rump cupim doner flank."
+                android:textColor="@color/white"
+                android:layout_gravity="center"/>
+        </ScrollView>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
