@@ -7,5 +7,8 @@ data class Musician(
     val name: String,
     val description: String,
     val birthDate: Date,
+    val image: String,
+    val albums: List<Album>,
+    val performerPrizes: List<Performer>,
     val imagenResId: Int
 )
