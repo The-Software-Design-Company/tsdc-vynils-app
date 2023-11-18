@@ -49,7 +49,6 @@ class MusiciansAdapter ():RecyclerView.Adapter<MusiciansAdapter.MusicianViewHold
         Picasso.get()
             .load(currentElement.image)
             .into(holder.image)
-        //holder.image.setImageResource(R.drawable.avril)
         holder.text.text = currentElement.name
     }
 
