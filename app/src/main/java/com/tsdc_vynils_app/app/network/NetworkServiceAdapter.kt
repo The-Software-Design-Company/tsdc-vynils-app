@@ -16,6 +16,7 @@ import com.tsdc_vynils_app.app.models.Album
 import org.json.JSONArray
 import org.json.JSONObject
 import com.google.gson.Gson
+import com.tsdc_vynils_app.app.models.Collector
 import com.tsdc_vynils_app.app.BuildConfig as Config
 
 class NetworkServiceAdapter constructor(context: Context) {
@@ -64,5 +65,21 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
+    }
+
+    fun getCollectors(onComplete:(resp:List<Collector>)->Unit, onError: (error:VolleyError)->Unit){
+        requestQueue.add(getRequest("collectors",
+            Response.Listener<String> { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Collector>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    list.add(i, Collector(id = item.getInt("id"),name = item.getString("name"), telephone = item.getString("telephone"), email = item.getString("email"), imagenResId = 0, comments = emptyList(), favoritePerformers = emptyList(), collectorAlbums = emptyList() ))
+                }
+                onComplete(list)
+            },
+            Response.ErrorListener {
+                onError(it)
+            }))
     }
 }
