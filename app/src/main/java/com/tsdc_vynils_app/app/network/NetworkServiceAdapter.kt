@@ -2,20 +2,18 @@ package com.tsdc_vynils_app.app.network
 
 
 import android.content.Context
-import android.util.Log
-import com.android.volley.BuildConfig
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.JsonRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.tsdc_vynils_app.app.models.Album
 import org.json.JSONArray
-import org.json.JSONObject
 import com.google.gson.Gson
+import com.tsdc_vynils_app.app.models.Musician
+import java.text.SimpleDateFormat
+import java.util.Date
 import com.tsdc_vynils_app.app.BuildConfig as Config
 
 class NetworkServiceAdapter constructor(context: Context) {
@@ -61,6 +59,35 @@ class NetworkServiceAdapter constructor(context: Context) {
                 )
         )
     }
+
+    fun getMusicians(onComplete:(resp:List<Musician>)->Unit, onError: (error:VolleyError)->Unit){
+        requestQueue.add(getRequest("musicians",
+            Response.Listener<String> { response ->
+                val resp = JSONArray(response)
+                var list = mutableListOf<Musician>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    val dateString = item.getString("birthDate")
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val birthDateMusician: Date = inputFormat.parse(dateString)
+
+                    list.add(i, Musician(
+                        id = item.getInt("id"),
+                        name = item.getString("name"), image = item.getString("image"),
+                        description = item.getString("description"), birthDate = birthDateMusician, albums = emptyList(),
+                        performerPrizes =emptyList(),
+                        imagenResId = 0))
+                }
+
+                list= list.sortedBy { it.name }.toMutableList()
+                onComplete(list)
+            },
+            Response.ErrorListener {
+                onError(it)
+            }))
+    }
+
+
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
