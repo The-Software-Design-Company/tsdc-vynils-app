@@ -12,8 +12,8 @@ import org.junit.Before
 import org.junit.Test
 
 
-
 class AlbumRepositoryTest {
+
 
     private val faker = Faker()
 

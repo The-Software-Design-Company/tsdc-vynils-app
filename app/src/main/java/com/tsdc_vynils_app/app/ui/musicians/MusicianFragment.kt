@@ -41,17 +41,7 @@ class MusicianFragment : Fragment() {
         viewModelAdapter=MusiciansAdapter()
 
 
-        /*val elementList = mutableListOf(
-            Musician(1,"Victor Manuelle","Salsero", Date(),R.drawable.victor_manuelle),
-            Musician(2,"Martin Garrix","Dance", Date(),R.drawable.martin),
-            Musician(3,"Alejandro Fernandez","Ranchera", Date(),R.drawable.alejandro),
-            Musician(4,"Avril Lavigne","Punk", Date(),R.drawable.avril)
 
-        )
-
-        val recyclerView: RecyclerView = _binding!!.recyclerViewMusicians
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = MusiciansAdapter(elementList)*/
 
         return root
     }
@@ -61,21 +51,7 @@ class MusicianFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = viewModelAdapter
 
-        val searchText = binding.editTextSearchMusician
 
-        searchText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModelAdapter?.filter?.filter(s)
-            }
-        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -88,13 +64,48 @@ class MusicianFragment : Fragment() {
             it.apply {
                 viewModelAdapter!!.elementList = this
             }
+
+            val searchText = binding.editTextSearchMusician
+            searchText.setText("")
+
+            searchText.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    viewModelAdapter?.filter?.filter(s)
+                }
+            })
+
+
+            val buttonOrder = binding.buttonOrderMusicians
+            buttonOrder.setOnClickListener {
+                if(buttonOrder.text=="A-Z") {
+                    viewModelAdapter?.sortByName(true)
+                    buttonOrder.text="Z-A"
+                }
+                else if(buttonOrder.text=="Z-A") {
+                    viewModelAdapter?.sortByName(false)
+                    buttonOrder.text="A-Z"
+                }
+            }
+
+
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
+
+
+
     }
 
-    private fun onNetworkError() {
+    fun onNetworkError() {
         if(!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(activity, "Error de conexión", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()

@@ -7,13 +7,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tsdc_vynils_app.app.models.Musician
+import com.tsdc_vynils_app.app.repositories.BandRepository
 import com.tsdc_vynils_app.app.repositories.MusicianRepository
 
 class MusicianViewModel(application: Application) :  AndroidViewModel(application) {
 
     private val musicianRepository = MusicianRepository(application)
+    private val bandRepository = BandRepository(application)
 
     private val _musicians = MutableLiveData<List<Musician>>()
+
 
     val musicians: LiveData<List<Musician>>
         get() = _musicians
@@ -32,15 +35,26 @@ class MusicianViewModel(application: Application) :  AndroidViewModel(applicatio
         refreshDataFromNetwork()
     }
 
-    private fun refreshDataFromNetwork() {
-        musicianRepository.refreshData({
-            _musicians.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
+    fun refreshDataFromNetwork() {
+
+        musicianRepository.refreshData({ musicians ->
+            bandRepository.refreshDataForMusician({ bandResults ->
+                val combinedList = mutableListOf<Musician>()
+                combinedList.addAll(musicians)
+                combinedList.addAll(bandResults)
+                _musicians.postValue(combinedList.sortedBy { it.name })
+                _eventNetworkError.value = false
+                _isNetworkErrorShown.value = false
+            }, { error ->
+                _eventNetworkError.value = true
+            })
+
+        }, { error ->
             _eventNetworkError.value = true
         })
     }
+
+
 
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true

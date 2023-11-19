@@ -3,9 +3,11 @@ package com.tsdc_vynils_app.app.network
 import com.android.volley.VolleyError
 import com.tsdc_vynils_app.app.models.Album
 import com.tsdc_vynils_app.app.models.Comment
+import com.tsdc_vynils_app.app.models.Musician
 import com.tsdc_vynils_app.app.models.Performer
 import com.tsdc_vynils_app.app.models.Track
 import com.tsdc_vynils_app.app.repositories.AlbumRepository
+import com.tsdc_vynils_app.app.repositories.MusicianRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -16,6 +18,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
+import java.util.Date
 
 class NetworkServiceAdapterTest {
     @RelaxedMockK
@@ -23,6 +26,10 @@ class NetworkServiceAdapterTest {
 
     @RelaxedMockK
     lateinit var albumRepository: AlbumRepository
+
+    @RelaxedMockK
+    lateinit var musicianRepository: MusicianRepository
+
 
     @Before
     fun onBefore() {
@@ -153,5 +160,93 @@ class NetworkServiceAdapterTest {
         // Then
         coVerify(exactly = 1) { networkServiceAdapter.getAlbum(unexpectedAlbumId, any(), any()) }
         assertNotNull(error)
+    }
+
+    @Test
+    fun `when The Api  Return Something Then Get musicians from api`() = runBlocking {
+        val expectedAlbums = listOf<Album>()
+        val expectedPerformerPrizes = listOf<Performer>()
+
+        // Given
+        val expectedMusicians = listOf(
+            Musician(
+                id = 1,
+                name="Paola Jara",
+                description="Songer",
+                birthDate= Date(),
+                image="SomeImage",
+                albums=expectedAlbums,
+                performerPrizes = expectedPerformerPrizes,
+                imagenResId = 0
+            )
+
+        )
+
+        coEvery { networkServiceAdapter.getMusicians(any(), any()) } coAnswers {
+            val onComplete: (List<Musician>) -> Unit = arg(0)
+            onComplete(expectedMusicians)
+        }
+
+        coEvery { musicianRepository.refreshData(any(), any()) } coAnswers {
+            val onComplete: (List<Musician>) -> Unit = arg(0)
+            onComplete.invoke(expectedMusicians)
+        }
+        // When
+        var result: List<Musician>? = null
+        musicianRepository.refreshData(
+            callback = { musicians ->
+                result = musicians
+            },
+            onError = { /* maneja el error, si es necesario */ }
+        )
+
+        // Then
+        coVerify(exactly = 1) { musicianRepository.refreshData(any(), any()) }
+        assertNotNull(result)
+        assertEquals(expectedMusicians, result)
+    }
+
+    @Test
+    fun `when The Api  Return Something Then Get bands for musicians from api`() = runBlocking {
+        val expectedAlbums = listOf<Album>()
+        val expectedPerformerPrizes = listOf<Performer>()
+
+        // Given
+        val expectedMusicians = listOf(
+            Musician(
+                id = 1,
+                name="Paola Jara",
+                description="Songer",
+                birthDate= Date(),
+                image="SomeImage",
+                albums=expectedAlbums,
+                performerPrizes = expectedPerformerPrizes,
+                imagenResId = 0
+            )
+
+        )
+
+        coEvery { networkServiceAdapter.getBandsToArtists(any(), any()) } coAnswers {
+            val onComplete: (List<Musician>) -> Unit = arg(0)
+            onComplete(expectedMusicians)
+        }
+
+        coEvery { musicianRepository.refreshData(any(), any()) } coAnswers {
+            val onComplete: (List<Musician>) -> Unit = arg(0)
+            onComplete.invoke(expectedMusicians)
+        }
+        // When
+        var result: List<Musician>? = null
+        musicianRepository.refreshData(
+            callback = { musicians ->
+                result = musicians
+            },
+            onError = { /* maneja el error, si es necesario */ }
+        )
+
+        // Then
+        coVerify(exactly = 1) { musicianRepository.refreshData(any(), any()) }
+        assertNotNull(result)
+        assertEquals(expectedMusicians, result)
     }
 }
