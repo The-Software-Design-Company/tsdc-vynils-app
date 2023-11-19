@@ -50,22 +50,6 @@ class CollectorsFragment : Fragment() {
         recyclerView = binding.recyclerViewCollectors
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = viewModelAdapter
-
-        val searchText = binding.editTextSearch
-
-        searchText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModelAdapter?.filter?.filter(s)
-            }
-        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -80,6 +64,21 @@ class CollectorsFragment : Fragment() {
             it.apply {
                 viewModelAdapter!!.elementList = this
             }
+            val searchText = binding.editTextSearch
+
+            searchText.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    viewModelAdapter?.filter?.filter(s)
+                }
+            })
         })
         viewModel.eventNetworkError.observe(
             viewLifecycleOwner,
