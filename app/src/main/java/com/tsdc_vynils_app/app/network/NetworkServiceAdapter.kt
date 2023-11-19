@@ -12,6 +12,7 @@ import com.tsdc_vynils_app.app.models.Album
 import org.json.JSONArray
 import com.google.gson.Gson
 import com.tsdc_vynils_app.app.models.Musician
+import com.tsdc_vynils_app.app.models.Collector
 import java.text.SimpleDateFormat
 import java.util.Date
 import com.tsdc_vynils_app.app.BuildConfig as Config
@@ -32,7 +33,7 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
     fun getAlbums(onComplete:(resp:List<Album>)->Unit, onError: (error:VolleyError)->Unit){
         requestQueue.add(getRequest("albums",
-            Response.Listener<String> { response ->
+            { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
                 for (i in 0 until resp.length()) {
@@ -41,7 +42,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 }
                 onComplete(list)
             },
-            Response.ErrorListener {
+            {
                 onError(it)
             }))
     }
@@ -49,11 +50,11 @@ class NetworkServiceAdapter constructor(context: Context) {
     fun getAlbum(albumId: Int, onComplete: (response: Album)->Unit, onError: (error: VolleyError)->Unit) {
         requestQueue.add(
             getRequest("albums/${albumId}",
-                Response.Listener<String> { response ->
+                { response ->
                     val album = Gson().fromJson(response, Album::class.java)
                     onComplete(album)
                 },
-                Response.ErrorListener {
+                {
                     onError(it)
                 }
                 )
@@ -62,7 +63,7 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     fun getMusicians(onComplete:(resp:List<Musician>)->Unit, onError: (error:VolleyError)->Unit){
         requestQueue.add(getRequest("musicians",
-            Response.Listener<String> { response ->
+            { response ->
                 val resp = JSONArray(response)
                 var list = mutableListOf<Musician>()
                 for (i in 0 until resp.length()) {
@@ -82,12 +83,26 @@ class NetworkServiceAdapter constructor(context: Context) {
                 list= list.sortedBy { it.name }.toMutableList()
                 onComplete(list)
             },
-            Response.ErrorListener {
+            {
                 onError(it)
             }))
     }
 
-
+    fun getCollectors(onComplete:(resp:List<Collector>)->Unit, onError: (error:VolleyError)->Unit){
+        requestQueue.add(getRequest("collectors",
+            { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Collector>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    list.add(i, Collector(id = item.getInt("id"),name = item.getString("name"), telephone = item.getString("telephone"), email = item.getString("email"), profilePicture = "", comments = emptyList(), favoritePerformers = emptyList(), collectorAlbums = emptyList() ))
+                }
+                onComplete(list)
+            },
+            {
+                onError(it)
+            }))
+    }
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
