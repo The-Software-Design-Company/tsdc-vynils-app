@@ -4,9 +4,12 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.tsdc_vynils_app.app.models.Album
 import com.tsdc_vynils_app.app.models.Collector
+import com.tsdc_vynils_app.app.models.Musician
 import com.tsdc_vynils_app.app.repositories.CollectorRepository
+import com.tsdc_vynils_app.app.repositories.MusicianRepository
 
-class CollectorViewModel(application: Application, collectorId: Int): AndroidViewModel(application) {
+class CollectorViewModel(application: Application) :  AndroidViewModel(application) {
+
     private val collectorRepository = CollectorRepository(application)
 
     private val _collectors = MutableLiveData<List<Collector>>()
@@ -24,13 +27,11 @@ class CollectorViewModel(application: Application, collectorId: Int): AndroidVie
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    val id:Int = collectorId
-
     init {
         refreshDataFromNetwork()
     }
 
-    fun refreshDataFromNetwork() {
+    private fun refreshDataFromNetwork() {
         collectorRepository.refreshData({
             _collectors.postValue(it)
             _eventNetworkError.value = false
@@ -46,9 +47,9 @@ class CollectorViewModel(application: Application, collectorId: Int): AndroidVie
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(CollectorViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return HomeViewModel(app) as T
+                return CollectorViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
