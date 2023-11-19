@@ -37,6 +37,17 @@
             android:hint="@string/buscar_hint"
             android:padding="8dp" />
 
+        <Button
+            android:id="@+id/buttonOrderMusicians"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A-Z"
+            android:textColor="@color/white"
+            android:fontFamily="@font/open_sans_semibold"
+            android:textSize="14sp">
+
+        </Button>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_musicians"
             android:layout_marginTop="8dp"

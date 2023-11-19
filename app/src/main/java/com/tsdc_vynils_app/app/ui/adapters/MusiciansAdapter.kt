@@ -83,5 +83,14 @@ class MusiciansAdapter ():RecyclerView.Adapter<MusiciansAdapter.MusicianViewHold
             }
         }
     }
+
+    fun sortByName(asc: Boolean) {
+        elementList = if (asc) {
+            elementList.sortedBy { it.name }
+        } else {
+            elementList.sortedByDescending { it.name }
+        }
+        notifyDataSetChanged()
+    }
 }
 

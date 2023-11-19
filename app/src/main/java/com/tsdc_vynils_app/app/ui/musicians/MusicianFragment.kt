@@ -83,6 +83,19 @@ class MusicianFragment : Fragment() {
             })
 
 
+            val buttonOrder = binding.buttonOrderMusicians
+            buttonOrder.setOnClickListener {
+                if(buttonOrder.text=="A-Z") {
+                    viewModelAdapter?.sortByName(true)
+                    buttonOrder.text="Z-A"
+                }
+                else if(buttonOrder.text=="Z-A") {
+                    viewModelAdapter?.sortByName(false)
+                    buttonOrder.text="A-Z"
+                }
+            }
+
+
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
