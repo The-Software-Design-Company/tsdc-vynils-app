@@ -1,5 +1,6 @@
 package com.tsdc_vynils_app.app.ui.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,11 +8,15 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tsdc_vynils_app.app.R
 import com.tsdc_vynils_app.app.models.Musician
+import com.tsdc_vynils_app.app.ui.artistDetails.ArtistDetailsActivity
+import com.tsdc_vynils_app.app.viewModels.ArtistDetailViewModel
 
 
 class MusiciansAdapter ():RecyclerView.Adapter<MusiciansAdapter.MusicianViewHolder>(), Filterable {
@@ -28,21 +33,45 @@ class MusiciansAdapter ():RecyclerView.Adapter<MusiciansAdapter.MusicianViewHold
 
     private var filteredData: List<Musician> =elementList
 
-    class MusicianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MusicianViewHolder(itemView: View , private val onItemClickListener: (Int) -> Unit) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.imageArtistItem)
         val text: TextView = itemView.findViewById(R.id.textArtistItem)
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClickListener(position)
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianViewHolder {
         elementListCopy=elementList.toList()
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.artist_item, parent, false)
-        itemView.setOnClickListener {
+        /*itemView.setOnClickListener {
             itemView.findNavController().navigate(R.id.actionNavigationMusicianToArtistDetailsActivity)
+        }*/
+        val onItemClickListener: (Int) -> Unit = { position ->
+            val musician = elementList[position]
+            val intent = Intent(itemView.context, ArtistDetailsActivity::class.java)
+            intent.putExtra("musician", musician)
+
+            val artistDetailViewModel = ViewModelProvider(itemView.context as AppCompatActivity)
+                .get(ArtistDetailViewModel::class.java)
+            artistDetailViewModel.setMusician(musician)
+
+
+            itemView.context.startActivity(intent)
         }
 
-        return MusicianViewHolder(itemView)
+        return MusicianViewHolder(itemView,onItemClickListener)
     }
+
+
+
 
     override fun onBindViewHolder(holder: MusicianViewHolder, position: Int) {
         val currentElement = elementList[position]
