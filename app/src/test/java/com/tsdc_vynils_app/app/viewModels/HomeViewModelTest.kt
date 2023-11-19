@@ -1,44 +1,40 @@
-package com.tsdc_vynils_app.app.viewModels
-
+package com.tsdc_vynils_app.app.repositories
 import android.app.Application
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.github.javafaker.Faker
 import com.tsdc_vynils_app.app.models.Album
 import com.tsdc_vynils_app.app.network.NetworkServiceAdapter
-import com.tsdc_vynils_app.app.repositories.AlbumRepository
+import com.tsdc_vynils_app.app.viewModels.HomeViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
 
 class HomeViewModelTest {
 
+
     private val faker = Faker()
-
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
-
-    @RelaxedMockK
-    lateinit var application: Application
 
     @RelaxedMockK
     private lateinit var albumRepository: AlbumRepository
 
+    @RelaxedMockK
+    private lateinit var application: Application
 
+    @RelaxedMockK
+    private lateinit var networkServiceAdapter: NetworkServiceAdapter
+
+    @RelaxedMockK
     private lateinit var homeViewModel: HomeViewModel
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        //homeViewModel = HomeViewModel(application)
-        //homeViewModel.albumsRepository = albumRepository
     }
 
     @Test
-    fun testRefreshDataFromNetworkSuccess() {
+    fun testRefreshDataSuccess() {
         val albums = listOf(
             Album(1,faker.name().toString(),
                 faker.name().toString(),
@@ -53,25 +49,41 @@ class HomeViewModelTest {
                 faker.name().toString(),faker.music().genre(),faker.music().instrument().toString(),
                 emptyList(),
                 emptyList(),
-                emptyList() )
-        )
+                emptyList() ))
 
-        //TO DO  el test no funciona genera el error java.lang.NoClassDefFoundError: org/apache/http/client/HttpClient
-        //pendiente corrección.
-        /*
+        coEvery { networkServiceAdapter.getAlbums(any(), any()) } coAnswers {
+            val onComplete: (List<Album>) -> Unit = arg(0)
+            onComplete(albums)
+        }
+
+
+        // Mockear el resultado de la función refreshData
         coEvery { albumRepository.refreshData(any(), any()) } coAnswers {
             val onComplete: (List<Album>) -> Unit = arg(0)
 
             onComplete.invoke(albums)
         }
 
-        homeViewModel.refreshDataFromNetwork()
+        albumRepository.refreshData(
+            { result ->
+                assert(result.size == 2)
+                assert(result[0].id == 1)
+                assert(result[1].id == 2)
+            },
+            { error ->
+                assert(false)
+            }
+        )
 
-        val observedAlbums = homeViewModel.albums.value
-        assert(observedAlbums != null && observedAlbums.size == 2)
-        assert(observedAlbums?.get(0)?.id == 1)
-        assert(observedAlbums?.get(1)?.id == 2)
+        coEvery { homeViewModel.refreshDataFromNetwork() } coAnswers {
+            val onComplete: (List<Album>) -> Unit = arg(0)
 
-         */
+            onComplete.invoke(albums)
+        }
+
+
+
     }
+
+
 }

@@ -105,7 +105,7 @@ class MusicianFragment : Fragment() {
 
     }
 
-    private fun onNetworkError() {
+    fun onNetworkError() {
         if(!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(activity, "Error de conexión", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()

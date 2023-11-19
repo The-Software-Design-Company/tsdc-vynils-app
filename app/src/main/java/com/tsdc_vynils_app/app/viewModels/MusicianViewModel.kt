@@ -35,7 +35,7 @@ class MusicianViewModel(application: Application) :  AndroidViewModel(applicatio
         refreshDataFromNetwork()
     }
 
-    private fun refreshDataFromNetwork() {
+    fun refreshDataFromNetwork() {
 
         musicianRepository.refreshData({ musicians ->
             bandRepository.refreshDataForMusician({ bandResults ->
