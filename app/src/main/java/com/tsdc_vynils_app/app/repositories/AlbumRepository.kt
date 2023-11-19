@@ -10,11 +10,8 @@ class AlbumRepository (val application: Application){
         return NetworkServiceAdapter.getInstance(application).getAlbums()
     }
 
-    fun refreshDataById(albumId: Int, callback: (Album)->Unit, onError: (VolleyError)->Unit) {
-        NetworkServiceAdapter.getInstance(application).getAlbum(albumId, {
-            callback(it)
-        },
-            onError
-        )
+    suspend fun refreshDataById(albumId: Int):Album{
+        return NetworkServiceAdapter.getInstance(application).getAlbum(albumId)
     }
+
 }
