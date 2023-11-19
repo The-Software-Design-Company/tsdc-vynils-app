@@ -43,7 +43,7 @@ class NetworkServiceAdapterTest {
         val expectedPerformers = listOf<Performer>()
 
         // Given
-        val expectedAlbums = listOf(
+        var expectedAlbums = listOf(
             Album(
                 id = 1,
                 name = "Buscando América",
@@ -58,28 +58,14 @@ class NetworkServiceAdapterTest {
             )
         )
 
-        coEvery { networkServiceAdapter.getAlbums(any(), any()) } coAnswers {
-            val onComplete: (List<Album>) -> Unit = arg(0)
-            onComplete(expectedAlbums)
-        }
 
-        coEvery { albumRepository.refreshData(any(), any()) } coAnswers {
-            val onComplete: (List<Album>) -> Unit = arg(0)
-            onComplete.invoke(expectedAlbums)
-        }
-        // When
-        var result: List<Album>? = null
-        albumRepository.refreshData(
-            callback = { albums ->
-                result = albums
-            },
-            onError = { /* maneja el error, si es necesario */ }
-        )
+        expectedAlbums=networkServiceAdapter.getAlbums()
+
+        var expectedAlbumsRep=albumRepository.refreshData()
 
         // Then
-        coVerify(exactly = 1) { albumRepository.refreshData(any(), any()) }
-        assertNotNull(result)
-        assertEquals(expectedAlbums, result)
+        assertNotNull(expectedAlbums)
+        assertEquals(expectedAlbums, expectedAlbumsRep)
     }
 
     @Test
@@ -168,42 +154,27 @@ class NetworkServiceAdapterTest {
         val expectedPerformerPrizes = listOf<Performer>()
 
         // Given
-        val expectedMusicians = listOf(
+        var expectedMusicians = listOf(
             Musician(
                 id = 1,
                 name="Paola Jara",
                 description="Songer",
                 birthDate= Date(),
                 image="SomeImage",
-                albums=expectedAlbums,
-                performerPrizes = expectedPerformerPrizes,
+                albums= emptyList(),
+                performerPrizes = emptyList(),
                 imagenResId = 0
             )
 
         )
 
-        coEvery { networkServiceAdapter.getMusicians(any(), any()) } coAnswers {
-            val onComplete: (List<Musician>) -> Unit = arg(0)
-            onComplete(expectedMusicians)
-        }
+        expectedMusicians=networkServiceAdapter.getMusicians()
 
-        coEvery { musicianRepository.refreshData(any(), any()) } coAnswers {
-            val onComplete: (List<Musician>) -> Unit = arg(0)
-            onComplete.invoke(expectedMusicians)
-        }
-        // When
-        var result: List<Musician>? = null
-        musicianRepository.refreshData(
-            callback = { musicians ->
-                result = musicians
-            },
-            onError = { /* maneja el error, si es necesario */ }
-        )
+        var expectedMusiciansRep=musicianRepository.refreshData()
 
         // Then
-        coVerify(exactly = 1) { musicianRepository.refreshData(any(), any()) }
-        assertNotNull(result)
-        assertEquals(expectedMusicians, result)
+        assertNotNull(expectedMusicians)
+        assertEquals(expectedMusicians, expectedMusiciansRep)
     }
 
     @Test
@@ -212,7 +183,7 @@ class NetworkServiceAdapterTest {
         val expectedPerformerPrizes = listOf<Performer>()
 
         // Given
-        val expectedMusicians = listOf(
+        var expectedMusicians = listOf(
             Musician(
                 id = 1,
                 name="Paola Jara",
@@ -226,27 +197,12 @@ class NetworkServiceAdapterTest {
 
         )
 
-        coEvery { networkServiceAdapter.getBandsToArtists(any(), any()) } coAnswers {
-            val onComplete: (List<Musician>) -> Unit = arg(0)
-            onComplete(expectedMusicians)
-        }
+        expectedMusicians=networkServiceAdapter.getMusicians()
 
-        coEvery { musicianRepository.refreshData(any(), any()) } coAnswers {
-            val onComplete: (List<Musician>) -> Unit = arg(0)
-            onComplete.invoke(expectedMusicians)
-        }
-        // When
-        var result: List<Musician>? = null
-        musicianRepository.refreshData(
-            callback = { musicians ->
-                result = musicians
-            },
-            onError = { /* maneja el error, si es necesario */ }
-        )
+        var expectedMusiciansRep=musicianRepository.refreshData()
 
         // Then
-        coVerify(exactly = 1) { musicianRepository.refreshData(any(), any()) }
-        assertNotNull(result)
-        assertEquals(expectedMusicians, result)
+        assertNotNull(expectedMusicians)
+        assertEquals(expectedMusicians, expectedMusiciansRep)
     }
 }

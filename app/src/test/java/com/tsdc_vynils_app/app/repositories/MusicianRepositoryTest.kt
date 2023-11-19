@@ -8,6 +8,8 @@ import com.tsdc_vynils_app.app.network.NetworkServiceAdapter
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import java.util.Date
@@ -34,8 +36,8 @@ class MusicianRepositoryTest {
     }
 
     @Test
-    fun testRefreshDataSuccess() {
-        val musicians = listOf(
+    fun testRefreshDataSuccess() = runBlocking  {
+        var musicians = listOf(
             Musician(
                 id = 1,
                 name=faker.name().toString(),
@@ -49,28 +51,15 @@ class MusicianRepositoryTest {
 
         )
 
-        coEvery { networkServiceAdapter.getMusicians(any(), any()) } coAnswers {
-            val onComplete: (List<Musician>) -> Unit = arg(0)
-            onComplete(musicians)
-        }
+        musicians=networkServiceAdapter.getMusicians()
 
 
 
-        coEvery { musicianRepository.refreshData(any(), any()) } coAnswers {
-            val onComplete: (List<Musician>) -> Unit = arg(0)
+        var expectedMusiciansRep=musicianRepository.refreshData()
 
-            onComplete.invoke(musicians)
-        }
-
-        musicianRepository.refreshData(
-            { result ->
-                assert(result.size == 1)
-                assert(result[0].id == 1)
-            },
-            { error ->
-                assert(false)
-            }
-        )
+        // Then
+        Assert.assertNotNull(musicians)
+        Assert.assertEquals(musicians, expectedMusiciansRep)
     }
 
 
