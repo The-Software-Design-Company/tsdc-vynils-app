@@ -60,6 +60,8 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
+
+
     fun getMusicians(onComplete:(resp:List<Musician>)->Unit, onError: (error:VolleyError)->Unit){
         requestQueue.add(getRequest("musicians",
             Response.Listener<String> { response ->
@@ -68,6 +70,34 @@ class NetworkServiceAdapter constructor(context: Context) {
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
                     val dateString = item.getString("birthDate")
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val birthDateMusician: Date = inputFormat.parse(dateString)
+
+                    list.add(i, Musician(
+                        id = item.getInt("id"),
+                        name = item.getString("name"), image = item.getString("image"),
+                        description = item.getString("description"), birthDate = birthDateMusician, albums = emptyList(),
+                        performerPrizes =emptyList(),
+                        imagenResId = 0))
+                }
+
+                list= list.sortedBy { it.name }.toMutableList()
+                onComplete(list)
+            },
+            Response.ErrorListener {
+                onError(it)
+            }))
+    }
+
+
+    fun getBandsToArtists(onComplete:(resp:List<Musician>)->Unit, onError: (error:VolleyError)->Unit){
+        requestQueue.add(getRequest("bands",
+            Response.Listener<String> { response ->
+                val resp = JSONArray(response)
+                var list = mutableListOf<Musician>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    val dateString = item.getString("creationDate")
                     val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                     val birthDateMusician: Date = inputFormat.parse(dateString)
 

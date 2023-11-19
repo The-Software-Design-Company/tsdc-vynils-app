@@ -22,7 +22,7 @@ class MusiciansAdapter ():RecyclerView.Adapter<MusiciansAdapter.MusicianViewHold
             notifyDataSetChanged()
         }
 
-    var elementListCopy: List<Musician> = emptyList()
+    var elementListCopy: List<Musician> = elementList
 
 
 
@@ -60,12 +60,13 @@ class MusiciansAdapter ():RecyclerView.Adapter<MusiciansAdapter.MusicianViewHold
         elementList=elementListCopy.toList()
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
+
                 val filterResults = FilterResults()
                 val searchText = constraint?.toString()?.toLowerCase()
 
 
                 filteredData = if (searchText.isNullOrBlank()) {
-                    elementListCopy
+                    elementList
                 } else {
                     elementList.filter { item ->
                         item.name.toLowerCase().contains(searchText)
