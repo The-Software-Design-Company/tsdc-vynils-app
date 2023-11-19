@@ -6,9 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.tsdc_vynils_app.app.models.Musician
 import com.tsdc_vynils_app.app.repositories.BandRepository
 import com.tsdc_vynils_app.app.repositories.MusicianRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MusicianViewModel(application: Application) :  AndroidViewModel(application) {
 
@@ -36,22 +40,24 @@ class MusicianViewModel(application: Application) :  AndroidViewModel(applicatio
     }
 
     fun refreshDataFromNetwork() {
-
-        musicianRepository.refreshData({ musicians ->
-            bandRepository.refreshDataForMusician({ bandResults ->
-                val combinedList = mutableListOf<Musician>()
-                combinedList.addAll(musicians)
-                combinedList.addAll(bandResults)
-                _musicians.postValue(combinedList.sortedBy { it.name })
-                _eventNetworkError.value = false
-                _isNetworkErrorShown.value = false
-            }, { error ->
-                _eventNetworkError.value = true
-            })
-
-        }, { error ->
+        try {
+            viewModelScope.launch(Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var data = musicianRepository.refreshData()
+                    var dataBand=bandRepository.refreshDataForMusician()
+                    val combinedList = mutableListOf<Musician>()
+                    combinedList.addAll(data)
+                    combinedList.addAll(dataBand)
+                    _musicians.postValue(combinedList.sortedBy { it.name })
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){
             _eventNetworkError.value = true
-        })
+        }
+
     }
 
 

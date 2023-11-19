@@ -7,6 +7,8 @@ import com.tsdc_vynils_app.app.viewModels.HomeViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -34,8 +36,8 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun testRefreshDataSuccess() {
-        val albums = listOf(
+    fun testRefreshDataSuccess()= runBlocking {
+        var albums = listOf(
             Album(1,faker.name().toString(),
                 faker.name().toString(),
                 faker.internet().url().toString(),
@@ -51,35 +53,16 @@ class HomeViewModelTest {
                 emptyList(),
                 emptyList() ))
 
-        coEvery { networkServiceAdapter.getAlbums(any(), any()) } coAnswers {
-            val onComplete: (List<Album>) -> Unit = arg(0)
-            onComplete(albums)
-        }
+        albums=networkServiceAdapter.getAlbums()
 
+        var expectedAlbumsRep=albumRepository.refreshData()
 
-        // Mockear el resultado de la función refreshData
-        coEvery { albumRepository.refreshData(any(), any()) } coAnswers {
-            val onComplete: (List<Album>) -> Unit = arg(0)
+        // Then
+        Assert.assertNotNull(albums)
+        Assert.assertEquals(albums, expectedAlbumsRep)
 
-            onComplete.invoke(albums)
-        }
+        homeViewModel.refreshDataFromNetwork()
 
-        albumRepository.refreshData(
-            { result ->
-                assert(result.size == 2)
-                assert(result[0].id == 1)
-                assert(result[1].id == 2)
-            },
-            { error ->
-                assert(false)
-            }
-        )
-
-        coEvery { homeViewModel.refreshDataFromNetwork() } coAnswers {
-            val onComplete: (List<Album>) -> Unit = arg(0)
-
-            onComplete.invoke(albums)
-        }
 
 
 
