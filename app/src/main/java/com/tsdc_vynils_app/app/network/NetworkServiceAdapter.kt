@@ -53,18 +53,16 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
-    fun getAlbum(albumId: Int, onComplete: (response: Album)->Unit, onError: (error: VolleyError)->Unit) {
+    suspend fun getAlbum (albumId: Int)= suspendCoroutine<Album>{ cont->
         requestQueue.add(
             getRequest("albums/${albumId}",
-                { response ->
+                Response.Listener<String> { response ->
                     val album = Gson().fromJson(response, Album::class.java)
-                    onComplete(album)
+                    cont.resume(album)
                 },
-                {
-                    onError(it)
-                }
-                )
-        )
+                Response.ErrorListener {
+                    cont.resumeWithException(it)
+                }))
     }
 
 
