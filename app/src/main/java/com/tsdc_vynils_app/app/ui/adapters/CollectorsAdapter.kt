@@ -29,17 +29,15 @@ class CollectorsAdapter ():RecyclerView.Adapter<CollectorsAdapter.CollectorViewH
     private var filteredData: List<Collector> =elementList
 
     class CollectorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val image: ImageView = itemView.findViewById(R.id.imageArtistItem)
-        val text: TextView = itemView.findViewById(R.id.textArtistItem)
+        val image: ImageView = itemView.findViewById(R.id.imageCollectorItem)
+        val text: TextView = itemView.findViewById(R.id.textCollectorItem)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorViewHolder {
         elementListCopy=elementList.toList()
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.artist_item, parent, false)
-        itemView.setOnClickListener {
-            //itemView.findNavController().navigate(R.id.actionNavigationCollectorToArtistDetailsActivity)
-        }
+            .inflate(R.layout.collector_item, parent, false)
+
 
         return CollectorViewHolder(itemView)
     }
