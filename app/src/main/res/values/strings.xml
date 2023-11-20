@@ -6,7 +6,6 @@
     <string name="great">Hola</string>
     <string name="newAlbum">Nuevo Álbum > </string>
     <string name="allAlbums">Todos los Álbumes </string>
-    <string name="title_album_details">Detalle de álbum</string>
     <string name="title_activity_album_details">Detalle del álbum</string>
     <string name="title_activity_artist_details">Detalle del artista</string>
     <string name="collectors_title">Coleccionistas</string>
