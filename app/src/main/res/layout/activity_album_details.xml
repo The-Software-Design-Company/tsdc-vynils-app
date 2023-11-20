@@ -10,23 +10,19 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/vynils_toolbar" />
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="?attr/actionBarSize"
-        android:paddingTop="5dp"
-        android:layout_gravity="center"
-        >
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="?attr/actionBarSize"
+            android:paddingTop="5dp"
+            android:layout_gravity="center"
             >
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/album_cover"
-                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="290dp"
                     android:layout_height="290dp"
                     android:src="@drawable/default_image"
@@ -80,7 +76,6 @@
                     android:textColor="#878787"
                     android:layout_centerHorizontal="true" />
                 <androidx.core.widget.NestedScrollView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginTop="410dp"
@@ -116,6 +111,5 @@
             </RelativeLayout>
         </ScrollView>
 
-    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

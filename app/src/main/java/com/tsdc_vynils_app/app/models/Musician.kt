@@ -18,40 +18,4 @@ data class Musician(
     val imagenResId: Int
 ) : Serializable {
 
-/*constructor(parcel: Parcel) : this(
-    parcel.readInt(),
-    parcel.readString() ?: "",
-    parcel.readString() ?: "",
-    Date(parcel.readLong()), // Convertir Long a Date
-    parcel.readString() ?: "",
-    emptyList(),
-    emptyList(),
-    parcel.readInt()
-)
-
-override fun writeToParcel(parcel: Parcel, flags: Int) {
-    parcel.writeInt(id)
-    parcel.writeString(name)
-    parcel.writeString(description)
-    parcel.writeLong(birthDate.time) // Convertir Date a Long
-    parcel.writeString(image)
-    // Si las listas no son nulas, puedes ajustar este código para escribir las listas
-    parcel.writeList(albums)
-    parcel.writeList(performerPrizes)
-    parcel.writeInt(imagenResId)
-}
-
-override fun describeContents(): Int {
-    return 0
-}
-
-companion object CREATOR : Parcelable.Creator<Musician> {
-    override fun createFromParcel(parcel: Parcel): Musician {
-        return Musician(parcel)
-    }
-
-    override fun newArray(size: Int): Array<Musician?> {
-        return arrayOfNulls(size)
-    }
-}*/
 }
