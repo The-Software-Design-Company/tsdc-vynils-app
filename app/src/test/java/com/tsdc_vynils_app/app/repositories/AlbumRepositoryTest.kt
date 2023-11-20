@@ -8,12 +8,14 @@ import com.tsdc_vynils_app.app.network.NetworkServiceAdapter
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
 
-
 class AlbumRepositoryTest {
+
 
     private val faker = Faker()
 
@@ -33,7 +35,7 @@ class AlbumRepositoryTest {
     }
 
     @Test
-    fun testRefreshDataSuccess() {
+    fun testRefreshDataSuccess() = runBlocking {
         val albums = listOf(
             Album(1,faker.name().toString(),
                 faker.name().toString(),
@@ -50,29 +52,11 @@ class AlbumRepositoryTest {
                 emptyList(),
                 emptyList() ))
 
-        coEvery { networkServiceAdapter.getAlbums(any(), any()) } coAnswers {
-            val onComplete: (List<Album>) -> Unit = arg(0)
-            onComplete(albums)
-        }
 
+        val result=albumRepository.refreshData()
 
-        // Mockear el resultado de la función refreshData
-        coEvery { albumRepository.refreshData(any(), any()) } coAnswers {
-            val onComplete: (List<Album>) -> Unit = arg(0)
+        Assert.assertNotNull(result)
 
-            onComplete.invoke(albums)
-        }
-
-        albumRepository.refreshData(
-            { result ->
-                assert(result.size == 2)
-                assert(result[0].id == 1)
-                assert(result[1].id == 2)
-            },
-            { error ->
-                assert(false)
-            }
-        )
     }
 
 

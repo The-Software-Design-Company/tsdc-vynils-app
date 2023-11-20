@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.artistDetails.ArtistDetailsActivity"
+    app:navGraph="@navigation/nav_graph">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/vynils_toolbar" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="?attr/actionBarSize"
+        android:paddingTop="5dp"
+        android:layout_gravity="center"
+        >
+        <ImageView
+            android:id="@+id/artist_photo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/default_avatar"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/caption_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textSize="8pt"
+            android:layout_marginTop="230dp"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="#50000000" />
+        <TextView
+            android:id="@+id/secondary_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="12pt"
+            android:layout_marginTop="290dp"
+            android:text="@string/secondary_artist_title"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="400dp"
+        >
+        <include layout="@layout/horizontal_line" />
+    </FrameLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="400dp">
+            <TextView
+                android:layout_width="256dp"
+                android:id="@+id/artist_bio"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:paddingRight="5dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_gravity="center"/>
+        </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

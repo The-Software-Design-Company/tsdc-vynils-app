@@ -23,7 +23,11 @@
         android:id="@+id/navigation_musician"
         android:name="com.tsdc_vynils_app.app.ui.musicians.MusicianFragment"
         android:label="@string/title_artistas"
-        tools:layout="@layout/fragment_musician" />
+        tools:layout="@layout/fragment_musician" >
+        <action
+            android:id="@+id/actionNavigationMusicianToArtistDetailsActivity"
+            app:destination="@id/artistDetailsActivity" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_collectors"
@@ -35,4 +39,9 @@
         android:name="com.tsdc_vynils_app.app.ui.albumDetails.AlbumDetailsActivity"
         android:label="activity_album_details"
         tools:layout="@layout/activity_album_details"/>
+    <activity
+        android:id="@+id/artistDetailsActivity"
+        android:name="com.tsdc_vynils_app.app.ui.artistDetails.ArtistDetailsActivity"
+        android:label="activity_artist_details"
+        tools:layout="@layout/activity_artist_details" />
 </navigation>

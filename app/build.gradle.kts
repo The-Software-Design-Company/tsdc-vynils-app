@@ -78,4 +78,6 @@ dependencies {
     testImplementation ("androidx.arch.core:core-testing:2.1.0")
 
     implementation ("com.android.volley:volley:1.2.1")
+
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
 }
