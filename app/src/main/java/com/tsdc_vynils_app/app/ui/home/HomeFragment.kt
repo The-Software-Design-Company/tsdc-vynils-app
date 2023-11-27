@@ -76,6 +76,11 @@ class HomeFragment : Fragment() {
             }
         }
 
+        val newAlbumButton=binding.newAlbumText
+        newAlbumButton.setOnClickListener{
+            newAlbumButton.findNavController().navigate(R.id.newAlbumActivity)
+        }
+
 
         return root
     }
