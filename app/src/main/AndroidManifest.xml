@@ -21,9 +21,6 @@
             android:name=".ui.artistDetails.ArtistDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.artistDetails.ArtistDetailsActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.albumDetails.AlbumDetailsActivity"
             android:exported="false"
             android:label="@string/title_activity_album_details"
