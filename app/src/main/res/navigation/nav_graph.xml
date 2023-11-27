@@ -49,4 +49,5 @@
         android:name="com.tsdc_vynils_app.app.ui.newAlbum.newAlbumActivity"
         android:label="@string/newAlbum"
         tools:layout="@layout/activity_new_album" />
+   
 </navigation>
