@@ -36,4 +36,5 @@
         <item>Elektra</item>
         <item>Fania Records</item>
     </string-array>
+    <string name="secondary_artist_title">Bio</string>
 </resources>
