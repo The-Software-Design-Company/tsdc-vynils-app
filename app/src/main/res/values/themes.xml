@@ -16,5 +16,16 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="DatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Cambiar el color del fondo -->
+        <item name="android:background">#F0F0F0</item>
+
+        <!-- Cambiar el color de los días no seleccionados -->
+        <item name="colorControlNormal">#333333</item>
+
+        <!-- Cambiar el color de los días seleccionados -->
+        <item name="colorControlActivated">#FF4081</item>
+    </style>
+
 
 </resources>

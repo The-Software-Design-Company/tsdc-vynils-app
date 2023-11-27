@@ -44,4 +44,10 @@
         android:name="com.tsdc_vynils_app.app.ui.artistDetails.ArtistDetailsActivity"
         android:label="activity_artist_details"
         tools:layout="@layout/activity_artist_details" />
+    <activity
+        android:id="@+id/newAlbumActivity"
+        android:name="com.tsdc_vynils_app.app.ui.newAlbum.newAlbumActivity"
+        android:label="@string/newAlbum"
+        tools:layout="@layout/activity_new_album" />
+   
 </navigation>

@@ -12,6 +12,9 @@
 
     <color name="colorTextSelected">#2DE0E0</color>
     <color name="colorTextUnselected">#878787</color>
+    <color name="backgroundEditText">#DADADA</color>
+    <color name="colorSpinnerText">#878787</color>
+    <color name="colorEditText">#878787</color>
 
 
 </resources>
