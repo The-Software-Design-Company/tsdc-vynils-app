@@ -21,6 +21,7 @@
     <string name="album_record_label_promp">Disquera</string>
     <string name="text_button_save_album">Guardar</string>
     <string name="text_button_cancel_album">Cancelar</string>
+    <string name="associate_track_text_button">Asociar tracks al Álbum</string>
     <string-array name="musical_genres">
         <item>Seleccione un Género</item>
         <item>Classical</item>
