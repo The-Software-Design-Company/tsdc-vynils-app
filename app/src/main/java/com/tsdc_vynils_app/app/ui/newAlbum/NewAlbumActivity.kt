@@ -1,6 +1,7 @@
 package com.tsdc_vynils_app.app.ui.newAlbum
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,9 +12,11 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import com.tsdc_vynils_app.app.R
 import com.tsdc_vynils_app.app.databinding.ActivityNewAlbumBinding
 import com.tsdc_vynils_app.app.databinding.FragmentHomeBinding
+import com.tsdc_vynils_app.app.ui.albumTrackForm.AlbumTrackFormActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -89,7 +92,11 @@ class newAlbumActivity : AppCompatActivity() {
         }
         recordLabelSpinner.adapter=recordLabelAdapter
 
-
+        val associateTrackText = findViewById<TextView>(R.id.associateTrack)
+        associateTrackText.setOnClickListener {
+            val intent = Intent(this, AlbumTrackFormActivity::class.java)
+            startActivity(intent)
+        }
      }
 
     override fun onSupportNavigateUp(): Boolean {

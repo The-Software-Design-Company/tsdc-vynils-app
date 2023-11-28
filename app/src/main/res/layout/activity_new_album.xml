@@ -109,13 +109,21 @@
             android:prompt="@string/album_record_label_promp"
             android:background="@drawable/rounded_edittext"
             android:layout_marginTop="10dp"/>
-
-
-
-
-
-
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/associateTrack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@string/associate_track_text_button"
+                android:textColor="@color/colorSelected"
+                android:gravity="end"
+                android:layout_gravity="end"
+                android:textStyle="bold" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,7 +138,6 @@
                 android:background="@color/colorEditText"
                 android:textColor="@color/white"
                 android:text="@string/text_button_cancel_album"/>
-
             <Button
                 android:id="@+id/saveAlbumButton"
                 android:layout_width="0dp"
@@ -142,15 +149,6 @@
                 android:textColor="@color/colorSelected"
 
                 android:text="@string/text_button_save_album"/>
-
-
         </LinearLayout>
-
-
-
-
     </LinearLayout>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
