@@ -4,25 +4,38 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.squareup.picasso.Picasso
 import com.tsdc_vynils_app.app.R
 import com.tsdc_vynils_app.app.databinding.ActivityNewAlbumBinding
 import com.tsdc_vynils_app.app.databinding.FragmentHomeBinding
+import com.tsdc_vynils_app.app.viewModels.AlbumDetailsViewModel
+import com.tsdc_vynils_app.app.viewModels.MusicianViewModel
+import com.tsdc_vynils_app.app.viewModels.NewAlbumViewModel
+import kotlinx.coroutines.launch
+import java.net.URL
 import com.tsdc_vynils_app.app.ui.albumTrackForm.AlbumTrackFormActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 class newAlbumActivity : AppCompatActivity() {
-
+    
 
     private var _binding: ActivityNewAlbumBinding? = null
     private val binding get() = _binding!!
@@ -31,8 +44,14 @@ class newAlbumActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_album)
 
         _binding = ActivityNewAlbumBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
+
+
+        val viewModel = ViewModelProvider(this, NewAlbumViewModel.Factory(this.application)).get(NewAlbumViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
         val toolbar = binding.toolbar
         val actionBar: ActionBar? = supportActionBar
         actionBar?.setDisplayShowTitleEnabled(false)
@@ -72,6 +91,19 @@ class newAlbumActivity : AppCompatActivity() {
         genresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         genresSpinner.adapter=genresAdapter
 
+
+        genresSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
+                viewModel.onGenreSelected(position)
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+                viewModel.noGenreSelected()
+            }
+        }
+
+        genresAdapter.notifyDataSetChanged()
+
         val recordLabelList = resources.getStringArray(R.array.musical_record_labels)
         val recordLabelSpinner=binding.spinnerRecordLabelList
         val recordLabelAdapter = object : ArrayAdapter<String>(
@@ -92,12 +124,73 @@ class newAlbumActivity : AppCompatActivity() {
         }
         recordLabelSpinner.adapter=recordLabelAdapter
 
-        val associateTrackText = findViewById<TextView>(R.id.associateTrack)
+        val associateTrackText = binding.associateTrack
         associateTrackText.setOnClickListener {
             val intent = Intent(this, AlbumTrackFormActivity::class.java)
             startActivity(intent)
+        }        
+        recordLabelSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
+                viewModel.onRecordLabelSelected(position)
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+                viewModel.noRecordLabelSelected()
+            }
         }
+
+        recordLabelAdapter.notifyDataSetChanged()
+
+        //buttons
+        val cancelButton=binding.cancelAlbumButton
+        cancelButton.setOnClickListener()
+        {
+            this.onSupportNavigateUp()
+        }
+
+        viewModel.errorMessage.observe(this, Observer { errorMessage ->
+            if (errorMessage.isNotEmpty()) {
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+
+            }
+        })
+
+        val saveButton=binding.saveAlbumButton
+
+        saveButton.setOnClickListener(){
+            lifecycleScope.launch {
+                try {
+                    if(viewModel.saveAlbum()){
+                        onBackPressed()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+        }
+
+        binding.editTextDateRelease.setEnabled(false);
+
+        //load image from url
+        val editTextCover=binding.coverUrlText
+        editTextCover.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                loadImageFromUrl(s.toString())
+            }
+        })
+
      }
+
+
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed() // Handle the Up button click event
@@ -131,6 +224,15 @@ class newAlbumActivity : AppCompatActivity() {
         )
 
         datePickerDialog.show()
+    }
+
+    private fun loadImageFromUrl(url: String) {
+        try {
+            URL(url)
+            Picasso.get().load(url).into(binding.albumCover)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 
