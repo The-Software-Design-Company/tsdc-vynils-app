@@ -1,6 +1,7 @@
 package com.tsdc_vynils_app.app.ui.newAlbum
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -15,6 +16,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +29,7 @@ import com.tsdc_vynils_app.app.viewModels.MusicianViewModel
 import com.tsdc_vynils_app.app.viewModels.NewAlbumViewModel
 import kotlinx.coroutines.launch
 import java.net.URL
+import com.tsdc_vynils_app.app.ui.albumTrackForm.AlbumTrackFormActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -122,6 +125,11 @@ class newAlbumActivity : AppCompatActivity() {
         }
         recordLabelSpinner.adapter=recordLabelAdapter
 
+        val associateTrackText = findViewById<TextView>(R.id.associateTrack)
+        associateTrackText.setOnClickListener {
+            val intent = Intent(this, AlbumTrackFormActivity::class.java)
+            startActivity(intent)
+        }        
         recordLabelSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
                 viewModel.onRecordLabelSelected(position)
