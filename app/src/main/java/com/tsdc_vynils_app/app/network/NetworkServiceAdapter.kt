@@ -44,11 +44,12 @@ class NetworkServiceAdapter constructor(context: Context) {
         requestQueue.add(getRequest("albums",
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
-                val list = mutableListOf<Album>()
+                var list = mutableListOf<Album>()
                 for (i in 0 until resp.length()) {//inicializado como variable de retorno
                     val item = resp.getJSONObject(i)
                     list.add(i, Album(id = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description"), comments = emptyList(), performers = emptyList(), tracks = emptyList() ))
                 }
+                list= list.sortedBy { it.name }.toMutableList()
                 cont.resume(list)
             },
             Response.ErrorListener {
