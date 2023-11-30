@@ -47,7 +47,6 @@ class newAlbumActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        //_binding.viewModel
 
         val viewModel = ViewModelProvider(this, NewAlbumViewModel.Factory(this.application)).get(NewAlbumViewModel::class.java)
         binding.viewModel = viewModel
@@ -125,7 +124,7 @@ class newAlbumActivity : AppCompatActivity() {
         }
         recordLabelSpinner.adapter=recordLabelAdapter
 
-        val associateTrackText = findViewById<TextView>(R.id.associateTrack)
+        val associateTrackText = binding.associateTrack
         associateTrackText.setOnClickListener {
             val intent = Intent(this, AlbumTrackFormActivity::class.java)
             startActivity(intent)
