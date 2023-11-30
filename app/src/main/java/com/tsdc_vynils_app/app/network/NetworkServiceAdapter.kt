@@ -6,6 +6,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.tsdc_vynils_app.app.models.Album
@@ -13,6 +14,9 @@ import org.json.JSONArray
 import com.google.gson.Gson
 import com.tsdc_vynils_app.app.models.Musician
 import com.tsdc_vynils_app.app.models.Collector
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Date
 import com.tsdc_vynils_app.app.BuildConfig as Config
@@ -140,8 +144,32 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
 
+    suspend fun postNewAlbum(
+        body: JSONObject
+    ): JSONObject = withContext(Dispatchers.IO) {
+        return@withContext suspendCoroutine { continuation ->
+            requestQueue.add(
+                postRequest(
+                    "albums",
+                    body,
+                    Response.Listener { response ->
+                        continuation.resume(response)
+                    },
+                    Response.ErrorListener { error ->
+                        continuation.resumeWithException(error)
+                    }
+                )
+            )
+        }
+    }
+
+
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
+    }
+
+    private fun postRequest(path: String, body: JSONObject, responseListener: Response.Listener<JSONObject>, errorListener: Response.ErrorListener ): JsonObjectRequest {
+        return  JsonObjectRequest(Request.Method.POST, BASE_URL+path, body, responseListener, errorListener)
     }
 }
