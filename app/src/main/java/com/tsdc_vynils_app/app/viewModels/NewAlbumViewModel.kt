@@ -13,6 +13,7 @@ import com.tsdc_vynils_app.app.repositories.AlbumRepository
 import com.tsdc_vynils_app.app.repositories.MusicianRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.net.URL
 
 class NewAlbumViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -101,23 +102,50 @@ class NewAlbumViewModel(application: Application) : AndroidViewModel(application
             _errorMessage.value = "La disquera es requerida"
             return false
         }
+        if (currentAlbum?.cover.isNullOrBlank()) {
+            _errorMessage.value = "No se ingresó una url para el cover del álbum"
+            return false
+        }
+
+        try {
+            URL(currentAlbum?.cover)
+        } catch (e: Exception) {
+            _errorMessage.value = "La url ingresada para el cover no es valida"
+            return false
+        }
+
+        val patternRegexurl = ".*\\.(png|jpg|jpeg)$"
+        val regex = Regex(patternRegexurl, RegexOption.IGNORE_CASE)
+
+        val urlAlbum=currentAlbum?.cover
+        if(urlAlbum!=null) {
+            if (!urlAlbum.matches(regex)) {
+                _errorMessage.value = "La url ingresada para el cover no es una url de una imagen"
+                return false
+            }
+        }
+
+
         return true
     }
 
-    suspend fun saveAlbum() {
+    suspend fun saveAlbum():Boolean {
         val currentAlbum = album.value
         if (validations()) {
             if (currentAlbum != null) {
                 try {
                     albumRepository.postNewAlbum(currentAlbum)
                     _errorMessage.value ="Álbum almacenado con éxito "
+                    return true
                 }
                 catch(ex:Exception){
-                    _errorMessage.value ="No fue posible almacenar el álbum, intentelo más tarde "+ ex.message
+                    _errorMessage.value ="No fue posible almacenar el álbum, intentelo más tarde "
+                    return false
                 }
             }
 
         }
+        return false
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {

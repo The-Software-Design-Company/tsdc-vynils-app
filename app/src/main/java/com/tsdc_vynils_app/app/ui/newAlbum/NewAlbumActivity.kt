@@ -3,6 +3,8 @@ package com.tsdc_vynils_app.app.ui.newAlbum
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -16,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.squareup.picasso.Picasso
 import com.tsdc_vynils_app.app.R
 import com.tsdc_vynils_app.app.databinding.ActivityNewAlbumBinding
 import com.tsdc_vynils_app.app.databinding.FragmentHomeBinding
@@ -23,6 +26,7 @@ import com.tsdc_vynils_app.app.viewModels.AlbumDetailsViewModel
 import com.tsdc_vynils_app.app.viewModels.MusicianViewModel
 import com.tsdc_vynils_app.app.viewModels.NewAlbumViewModel
 import kotlinx.coroutines.launch
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -149,8 +153,9 @@ class newAlbumActivity : AppCompatActivity() {
         saveButton.setOnClickListener(){
             lifecycleScope.launch {
                 try {
-                    viewModel.saveAlbum()
-                    onBackPressed()
+                    if(viewModel.saveAlbum()){
+                        onBackPressed()
+                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -159,11 +164,23 @@ class newAlbumActivity : AppCompatActivity() {
         }
 
         binding.editTextDateRelease.setEnabled(false);
+
+        //load image from url
+        val editTextCover=binding.coverUrlText
+        editTextCover.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                loadImageFromUrl(s.toString())
+            }
+        })
+
      }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
 
 
 
@@ -200,6 +217,15 @@ class newAlbumActivity : AppCompatActivity() {
         )
 
         datePickerDialog.show()
+    }
+
+    private fun loadImageFromUrl(url: String) {
+        try {
+            URL(url)
+            Picasso.get().load(url).into(binding.albumCover)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 
