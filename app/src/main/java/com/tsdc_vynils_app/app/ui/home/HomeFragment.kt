@@ -75,13 +75,7 @@ class HomeFragment : Fragment() {
 
         val scrollView = binding.contentAlbums
 
-        /*scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            if (scrollY <= 0) {
-                getAllAlbums()
-                binding.swipeRefreshLayout.isRefreshing = false
-            }
 
-        }*/
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             lifecycleScope.launch {
@@ -104,9 +98,11 @@ class HomeFragment : Fragment() {
 
     fun getAllAlbums(){
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.refreshDataFromNetwork()
+
 
         try {
+
+
 
             homeViewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> { albums ->
                 albums?.let {
@@ -133,6 +129,8 @@ class HomeFragment : Fragment() {
                 onNetworkError()
 
         }
+
+        homeViewModel.refreshDataFromNetwork()
 
     }
 
@@ -203,6 +201,7 @@ class HomeFragment : Fragment() {
                 imageSizeInPixels,
                 imageSizeInPixels
             )
+            albumImageView.contentDescription = "Imagen del álbum ${al.id}" // Agregar una etiqueta descriptiva
             albumImageView.setOnClickListener {
                 val bundle = bundleOf("albumId" to al.id)
                 albumImageView.findNavController().navigate(R.id.actionHomeFragmentToAlbumDetailsActivity, bundle)

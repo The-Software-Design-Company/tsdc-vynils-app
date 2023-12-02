@@ -39,16 +39,21 @@ class HomeViewModel(application: Application) :  AndroidViewModel(application) {
     fun refreshDataFromNetwork() {
         try {
             viewModelScope.launch(Dispatchers.Default){
-                withContext(Dispatchers.IO){
-                    var data = albumsRepository.refreshData()
-                    _albums.postValue(data)
+                try {
+                    withContext(Dispatchers.IO) {
+                        var data = albumsRepository.refreshData()
+                        _albums.postValue(data)
+                    }
+                    _eventNetworkError.postValue(false)
+                    _isNetworkErrorShown.postValue(false)
                 }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
+                catch(e:Exception){
+                    _eventNetworkError.postValue(true)
+                }
             }
         }
         catch (e:Exception){
-            _eventNetworkError.value = true
+            _eventNetworkError.postValue(true)
         }
 
 
