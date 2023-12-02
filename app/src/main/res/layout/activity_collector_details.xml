@@ -9,6 +9,9 @@
     tools:context=".ui.collectorDetails.CollectorDetailsActivity"
     app:navGraph="@navigation/nav_graph"
     >
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/vynils_toolbar" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +26,7 @@
                 android:id="@+id/collector_detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Detalle Coleccionista"
+                android:text="Detalle del Coleccionista"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 style="@style/secondLevelText"
