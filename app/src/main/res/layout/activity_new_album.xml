@@ -15,8 +15,6 @@
         xmlns:bind="http://schemas.android.com/apk/res-auto"
         android:background="@color/black">
 
-
-
         <include
             android:id="@+id/toolbar"
             layout="@layout/vynils_toolbar" />

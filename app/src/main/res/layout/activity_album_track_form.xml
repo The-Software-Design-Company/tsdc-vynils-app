@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tsdc_vynils_app.app.viewModels.AlbumTrackViewModel" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,6 +12,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.albumTrackForm.AlbumTrackFormActivity"
     android:background="@color/black"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <include
         android:id="@+id/toolbar"
@@ -33,6 +40,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="@color/colorEditText"
                 android:paddingStart="5dp"
+                android:text="@={viewModel.trackName}"
                 android:background="@drawable/rounded_edittext"/>
 
             <EditText
@@ -45,6 +53,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="@color/colorEditText"
                 android:paddingStart="5dp"
+                android:text="@={viewModel.trackDuration}"
                 android:background="@drawable/rounded_edittext"/>
 
             <LinearLayout
@@ -72,3 +81,4 @@
 
         </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
