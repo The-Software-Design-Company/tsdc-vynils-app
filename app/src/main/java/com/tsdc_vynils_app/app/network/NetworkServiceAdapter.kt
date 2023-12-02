@@ -164,7 +164,20 @@ class NetworkServiceAdapter constructor(context: Context) {
         }
     }
 
-
+    suspend fun postAssociateTrackToAlbum(albumId: Int, body: JSONObject): JSONObject = withContext(Dispatchers.IO) {
+        return@withContext suspendCoroutine { continuation ->  requestQueue.add(
+            postRequest(
+                "albums/${albumId}/tracks",
+                body,
+                Response.Listener {
+                        response -> continuation.resume(response)
+                },
+                Response.ErrorListener {  error->
+                    continuation.resumeWithException(error)
+                }
+            )
+        )}
+    }
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)

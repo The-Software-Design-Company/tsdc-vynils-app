@@ -3,6 +3,7 @@ package com.tsdc_vynils_app.app.repositories
 import android.app.Application
 import com.android.volley.VolleyError
 import com.tsdc_vynils_app.app.models.Album
+import com.tsdc_vynils_app.app.models.Track
 import com.tsdc_vynils_app.app.network.CacheManagerAlbumDetails
 import com.tsdc_vynils_app.app.network.NetworkServiceAdapter
 import org.json.JSONObject
@@ -47,6 +48,13 @@ class AlbumRepository (val application: Application){
         albumJson.put("genre", album.genre)
         albumJson.put("recordLabel", album.recordLabel)
         NetworkServiceAdapter.getInstance(application).postNewAlbum(albumJson)
+    }
+
+    suspend fun postAssociateTrackToAlbum(albumId: Int, track: Track) {
+        val trackJson = JSONObject()
+        trackJson.put("name", track.name)
+        trackJson.put("duration", track.duration)
+        NetworkServiceAdapter.getInstance(application).postAssociateTrackToAlbum(albumId, trackJson)
     }
 
 
