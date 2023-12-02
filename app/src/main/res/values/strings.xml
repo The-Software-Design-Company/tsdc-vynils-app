@@ -25,6 +25,8 @@
     <string name="album_content_description">Album</string>
     <string name="content_description_for_parent_content_linear_layout">Descripción del contenido para el diseño lineal principal</string>
     <string name="toolbar_description">Back</string>
+    <string name="collectors_title_description">Coleccionistas</string>
+
     <string-array name="musical_genres">
         <item>Seleccione un Género</item>
         <item>Classical</item>

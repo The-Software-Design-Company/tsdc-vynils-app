@@ -201,6 +201,7 @@ class HomeFragment : Fragment() {
                 imageSizeInPixels,
                 imageSizeInPixels
             )
+            albumImageView.contentDescription = "Imagen del álbum ${al.id}" // Agregar una etiqueta descriptiva
             albumImageView.setOnClickListener {
                 val bundle = bundleOf("albumId" to al.id)
                 albumImageView.findNavController().navigate(R.id.actionHomeFragmentToAlbumDetailsActivity, bundle)
