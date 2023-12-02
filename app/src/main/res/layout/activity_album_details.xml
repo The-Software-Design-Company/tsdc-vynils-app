@@ -92,6 +92,17 @@
                         android:layout_gravity="center"/>
                 </androidx.core.widget.NestedScrollView>
                 <TextView
+                    android:id="@+id/associateTrack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/associate_track_text_button"
+                    android:textColor="@color/colorSelected"
+                    android:gravity="left"
+                    android:layout_marginTop="510dp"
+                    android:textStyle="bold" />
+                <TextView
                     android:id="@+id/others_albumes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,14 +111,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     style="@style/secondLevelText"
                     android:gravity="left"
-                    android:layout_marginTop="510dp"
+                    android:layout_marginTop="530dp"
                     />
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="535dp"
+                    android:layout_marginTop="565dp"
                     tools:listitem="@layout/item_image_carousel" />
             </RelativeLayout>
         </ScrollView>
