@@ -89,6 +89,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginBottom="16dp"
                     android:orientation="vertical"
+                    android:textSize="18sp"
                     android:contentDescription="@string/content_description_for_parent_content_linear_layout">
                 </LinearLayout>
 
