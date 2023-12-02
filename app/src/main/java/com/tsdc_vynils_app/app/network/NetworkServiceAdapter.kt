@@ -117,6 +117,18 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     }
 
+    suspend fun getCollector (collectorId: Int)= suspendCoroutine<Collector>{ cont->
+        requestQueue.add(
+            getRequest("collectors/${collectorId}",
+                Response.Listener<String> { response ->
+                    val collector = Gson().fromJson(response, Collector::class.java)
+                    cont.resume(collector)
+                },
+                Response.ErrorListener {
+                    cont.resumeWithException(it)
+                }))
+    }
+
     suspend fun getBandsToArtists()= suspendCoroutine<List<Musician>> {  cont->
         requestQueue.add(getRequest("bands",
             Response.Listener<String> { response ->

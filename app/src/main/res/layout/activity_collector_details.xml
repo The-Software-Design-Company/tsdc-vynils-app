@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.collectorDetails.CollectorDetailsActivity"
+    app:navGraph="@navigation/nav_graph"
+    >
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/vynils_toolbar" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="?attr/actionBarSize"
+        android:paddingTop="5dp"
+        android:layout_gravity="center"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/collector_detail_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detalle del Coleccionista"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/secondLevelText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                />
+            <TextView
+                android:id="@+id/collector_detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="160dp"
+                android:text="Collector Name"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/secondLevelText"
+                 />
+            <TextView
+                android:id="@+id/collector_detail_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="190dp"
+                android:text="Collector Name"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/secondLevelText"
+                />
+            <TextView
+                android:id="@+id/collector_detail_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="220dp"
+                android:text="Collector Name"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/secondLevelText"
+                />
+            <TextView
+                android:id="@+id/others_albumes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gustos musicales"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/secondLevelText"
+                android:gravity="left"
+                android:layout_marginTop="330dp"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="380dp"
+                tools:listitem="@layout/item_image_carousel" />
+        </RelativeLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
