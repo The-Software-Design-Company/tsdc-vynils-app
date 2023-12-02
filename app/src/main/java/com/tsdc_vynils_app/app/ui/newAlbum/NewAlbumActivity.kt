@@ -124,11 +124,6 @@ class newAlbumActivity : AppCompatActivity() {
         }
         recordLabelSpinner.adapter=recordLabelAdapter
 
-        val associateTrackText = binding.associateTrack
-        associateTrackText.setOnClickListener {
-            val intent = Intent(this, AlbumTrackFormActivity::class.java)
-            startActivity(intent)
-        }        
         recordLabelSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
                 viewModel.onRecordLabelSelected(position)
