@@ -17,7 +17,7 @@
         <ScrollView
             android:id="@+id/contentAlbums"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginBottom="16dp"
             app:layout_behavior="com.google.android.material.bottomnavigation.BottomNavigationView$BottomNavigationViewBehavior"
@@ -26,7 +26,7 @@
             <LinearLayout
                 android:id="@+id/parentLinearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:orientation="vertical">
 
@@ -39,7 +39,9 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="20dp"
-                        android:src="@drawable/ellipse_1_2" />
+                        android:src="@drawable/ellipse_1_2"
+                        app:tint="#333333" />
+
 
                     <TextView
                         android:id="@+id/greatTextView"
@@ -55,14 +57,19 @@
                 <TextView
                     android:id="@+id/newAlbumText"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_marginRight="20dp"
                     android:fontFamily="@font/open_sans_semibold"
                     android:text="@string/newAlbum"
                     android:textColor="@color/colorSelected"
                     android:gravity="end"
                     android:layout_gravity="end"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+
 
                 <TextView
                     android:id="@+id/allAlbumsTextView"
@@ -81,12 +88,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:textSize="18sp"
+                    android:contentDescription="@string/content_description_for_parent_content_linear_layout">
                 </LinearLayout>
-
-
-
-
 
 
             </LinearLayout>

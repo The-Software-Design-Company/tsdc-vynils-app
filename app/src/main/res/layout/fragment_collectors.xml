@@ -22,7 +22,7 @@
             android:text="@string/collectors_title"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:contentDescription="@string/collectors_title_description" />
 
         <EditText
             android:id="@+id/editTextSearch"
@@ -34,7 +34,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:hint="@string/buscar_hint"
-            android:padding="8dp" />
+            android:padding="8dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_collectors"

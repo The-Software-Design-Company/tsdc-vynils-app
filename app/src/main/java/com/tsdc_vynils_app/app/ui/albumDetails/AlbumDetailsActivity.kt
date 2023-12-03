@@ -1,6 +1,7 @@
 package com.tsdc_vynils_app.app.ui.albumDetails
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
@@ -27,6 +28,7 @@ import com.tsdc_vynils_app.app.R
 import com.tsdc_vynils_app.app.databinding.ActivityAlbumDetailsBinding
 import com.tsdc_vynils_app.app.databinding.FragmentDashboardBinding
 import com.tsdc_vynils_app.app.databinding.FragmentHomeBinding
+import com.tsdc_vynils_app.app.ui.albumTrackForm.AlbumTrackFormActivity
 import com.tsdc_vynils_app.app.viewModels.AlbumDetailsViewModel
 import com.tsdc_vynils_app.app.viewModels.HomeViewModel
 import com.tsdc_vynils_app.app.utils.DateUtils
@@ -63,6 +65,7 @@ class AlbumDetailsActivity : AppCompatActivity() {
             val albumGenre = this.findViewById<TextView>(R.id.album_genre)
             val albumDescription = this.findViewById<TextView>(R.id.album_description)
             val artistAlbum = this.findViewById<TextView>(R.id.album_artist_name)
+            val intent = Intent(this, AlbumTrackFormActivity::class.java)
             viewModel.album.observe(this, Observer { data ->
                 data.apply {
                     titleAlbum.text = data.name
@@ -79,7 +82,18 @@ class AlbumDetailsActivity : AppCompatActivity() {
                             .into(coverView)
                     else
                         coverView.setImageDrawable( getDrawable(R.drawable.default_image))
-                    artistAlbum.text = data.performers.joinToString(",") { "${it.name} " }
+                    val artist = data.performers.joinToString(",") { "${it.name} " }
+                    artistAlbum.text = artist
+
+                    val associateTrackText = binding.associateTrack
+                    associateTrackText.setOnClickListener {
+                        val album = data.name
+                        val performer = if (data.performers.size > 0) data.performers[0].name else ""
+                        intent.putExtra("artist", performer)
+                        intent.putExtra("album", album)
+                        intent.putExtra("albumId", data.id)
+                        startActivity(intent)
+                    }
 
                 }
             })
@@ -94,7 +108,7 @@ class AlbumDetailsActivity : AppCompatActivity() {
 
 
             val images = listOf(R.drawable.default_image, R.drawable.default_image, R.drawable.default_image)
-            val adapter = CarouselAdapter(images)
+            val adapter = CarouselAdapter(images,"Álbum")
             binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             binding.recyclerView.adapter = adapter
         }
@@ -102,6 +116,7 @@ class AlbumDetailsActivity : AppCompatActivity() {
             Toast.makeText(this, "Argument is missing", Toast.LENGTH_SHORT).show()
             Log.e("TAG", "Argument is missing")
         }
+
     }
 
 

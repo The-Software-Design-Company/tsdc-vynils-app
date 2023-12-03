@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:contentDescription="@null" />
+        android:contentDescription="@string/toolbar_description" />
     <TextView
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"

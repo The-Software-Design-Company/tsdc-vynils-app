@@ -3,8 +3,8 @@
     <string name="title_albumes">Álbumes</string>
     <string name="title_artistas">Artistas</string>
     <string name="title_coleccionistas">Coleccionistas</string>
-    <string name="great">Hola</string>
-    <string name="newAlbum">Nuevo Álbum > </string>
+    <string name="great">¡Genial!</string>
+    <string name="newAlbum">Nuevo Álbum</string>
     <string name="allAlbums">Todos los Álbumes </string>
     <string name="title_activity_album_details">Detalle del álbum</string>
     <string name="title_activity_artist_details">Detalle del artista</string>
@@ -21,6 +21,12 @@
     <string name="album_record_label_promp">Disquera</string>
     <string name="text_button_save_album">Guardar</string>
     <string name="text_button_cancel_album">Cancelar</string>
+    <string name="associate_track_text_button">Asociar tracks al Álbum</string>
+    <string name="album_content_description">Album</string>
+    <string name="content_description_for_parent_content_linear_layout">Descripción del contenido para el diseño lineal principal</string>
+    <string name="toolbar_description">Back</string>
+    <string name="collectors_title_description">Coleccionistas</string>
+
     <string-array name="musical_genres">
         <item>Seleccione un Género</item>
         <item>Classical</item>

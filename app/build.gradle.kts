@@ -41,9 +41,14 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        dataBinding = true
     }
 
     viewBinding {
+        enable = true
+    }
+
+    dataBinding{
         enable = true
     }
 }
@@ -80,4 +85,5 @@ dependencies {
     implementation ("com.android.volley:volley:1.2.1")
 
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+
 }

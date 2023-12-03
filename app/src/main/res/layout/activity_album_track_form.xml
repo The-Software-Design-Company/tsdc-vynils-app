@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tsdc_vynils_app.app.viewModels.AlbumTrackViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.albumTrackForm.AlbumTrackFormActivity"
+    android:background="@color/black"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/vynils_toolbar" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+             <TextView
+                 android:textColor="@color/white"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_marginLeft="30dp"
+                 android:layout_marginTop="50dp"
+                 android:text="Agregar nuevo track" />
+
+            <EditText
+                android:id="@+id/editTextNombre"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:layout_weight="6"
+                android:hint="Nombre"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorEditText"
+                android:paddingStart="5dp"
+                android:text="@={viewModel.trackName}"
+                android:background="@drawable/rounded_edittext"/>
+
+            <EditText
+                android:id="@+id/editTextDuracion"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:layout_weight="6"
+                android:hint="Duración"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorEditText"
+                android:paddingStart="5dp"
+                android:text="@={viewModel.trackDuration}"
+                android:background="@drawable/rounded_edittext"/>
+
+            <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+
+                 <Button
+                     android:id="@+id/btnCancelar"
+                     android:layout_width="150dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:textColor="@color/white"
+                     android:text="Cancelar" />
+
+                 <Button
+                     android:id="@+id/btnGuardar"
+                     android:textColor="@color/black"
+                     android:layout_width="150dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:backgroundTint="@color/teal_200"
+                     android:text="Guardar" />
+             </LinearLayout>
+
+        </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

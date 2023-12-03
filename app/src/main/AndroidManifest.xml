@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Tsdcvynilsapp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.albumTrackForm.AlbumTrackFormActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.newAlbum.newAlbumActivity"
             android:exported="false" />
         <activity
@@ -25,6 +28,11 @@
             android:exported="false"
             android:label="@string/title_activity_album_details"
             android:theme="@style/Theme.Tsdcvynilsapp" />
+        <activity
+                android:name=".ui.collectorDetails.CollectorDetailsActivity"
+                android:exported="false"
+                android:label="@string/title_coleccionistas"
+                android:theme="@style/Theme.Tsdcvynilsapp" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

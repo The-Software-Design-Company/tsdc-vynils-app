@@ -49,5 +49,10 @@
         android:name="com.tsdc_vynils_app.app.ui.newAlbum.newAlbumActivity"
         android:label="@string/newAlbum"
         tools:layout="@layout/activity_new_album" />
-   
+    <activity
+        android:id="@+id/albumTrackFormActivity"
+        android:name="com.tsdc_vynils_app.app.ui.albumTrackForm.AlbumTrackFormActivity"
+        android:label="activity_album_track_form"
+        tools:layout="@layout/activity_album_track_form" />
+
 </navigation>
