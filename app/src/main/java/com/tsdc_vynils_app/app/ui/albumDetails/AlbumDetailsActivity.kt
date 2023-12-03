@@ -91,6 +91,7 @@ class AlbumDetailsActivity : AppCompatActivity() {
                         val performer = if (data.performers.size > 0) data.performers[0].name else ""
                         intent.putExtra("artist", performer)
                         intent.putExtra("album", album)
+                        intent.putExtra("albumId", data.id)
                         startActivity(intent)
                     }
 
