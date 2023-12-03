@@ -8,13 +8,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.tsdc_vynils_app.app.models.Collector
+import com.tsdc_vynils_app.app.models.Musician
 import com.tsdc_vynils_app.app.repositories.CollectorRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CollectorDetailsViewModel(application: Application, collectorId: Int): AndroidViewModel(application) {
-    private val collectorRepository = CollectorRepository(application)
+class CollectorDetailsViewModel(): ViewModel() {
+
 
     private val _collector = MutableLiveData<Collector>()
 
@@ -31,37 +32,20 @@ class CollectorDetailsViewModel(application: Application, collectorId: Int): And
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    val id:Int = collectorId
 
-    init {
-        refreshDataFromNetwork()
+
+
+    fun setCollector(collector: Collector) {
+        _collector.value = collector
     }
 
-    private fun refreshDataFromNetwork() {
-        try {
-            viewModelScope.launch(Dispatchers.Default){
-                withContext(Dispatchers.IO){
-                    var data = collectorRepository.refreshDataById(id)
-                    _collector.postValue(data)
-                }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
-            }
-        }
-        catch (e:Exception){
-            _eventNetworkError.value = true
-        }
 
-    }
-    fun onNetworkErrorShown() {
-        _isNetworkErrorShown.value = true
-    }
 
-    class Factory(val app: Application, val collectorId: Int) : ViewModelProvider.Factory {
+    class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(CollectorDetailsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return CollectorDetailsViewModel(app, collectorId) as T
+                return CollectorDetailsViewModel() as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

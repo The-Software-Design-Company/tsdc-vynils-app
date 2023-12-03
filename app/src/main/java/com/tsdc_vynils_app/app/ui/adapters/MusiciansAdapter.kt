@@ -51,9 +51,7 @@ class MusiciansAdapter ():RecyclerView.Adapter<MusiciansAdapter.MusicianViewHold
         elementListCopy=elementList.toList()
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.artist_item, parent, false)
-        /*itemView.setOnClickListener {
-            itemView.findNavController().navigate(R.id.actionNavigationMusicianToArtistDetailsActivity)
-        }*/
+
         val onItemClickListener: (Int) -> Unit = { position ->
             val musician = elementList[position]
             val intent = Intent(itemView.context, ArtistDetailsActivity::class.java)

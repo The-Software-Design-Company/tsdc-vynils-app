@@ -19,9 +19,11 @@
         android:paddingTop="5dp"
         android:layout_gravity="center"
         >
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/collector_detail_title"
                 android:layout_width="wrap_content"
@@ -75,12 +77,12 @@
                 android:layout_marginTop="330dp"
                 />
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="380dp"
-                tools:listitem="@layout/item_image_carousel" />
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="380dp"
+                    tools:listitem="@layout/item_image_carousel" />
         </RelativeLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
