@@ -14,6 +14,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import com.tsdc_vynils_app.app.models.Track
+import io.mockk.CapturingSlot
 import org.json.JSONObject
 
 
@@ -64,24 +65,30 @@ class AlbumRepositoryTest {
 
     @Test
     fun testAssociateTrackToAnAlbum() = runBlocking {
-     /*   val mockName = faker.name().toString()
+        val mockName = faker.name().toString()
         val track = Track(1, mockName, "4:00")
         val networkServiceAdapterMock =  mockk<NetworkServiceAdapter>()
         val trackJson = JSONObject()
+        val albumIdSlot = CapturingSlot<Int>()
+        val bodySlot = CapturingSlot<JSONObject>()
         val mockResponse = JSONObject("{'name': '${mockName}', 'duration': '4:00'}")
         coEvery {
-            networkServiceAdapterMock.postAssociateTrackToAlbum(any(), any())
-        } coAnswers {_, _->
-            mockResponse
-        }
+                networkServiceAdapterMock.postAssociateTrackToAlbum(capture(albumIdSlot), capture(bodySlot))
+            } coAnswers {
+                val albumId = albumIdSlot.captured
+                val body = bodySlot.captured
+
+                mockResponse
+            }
 
 
 
-        val result=albumRepository()
+        val result= albumRepository.postAssociateTrackToAlbum(ALBUM)
 
-        Assert.assertNotNull(result) */
+        Assert.assertNotNull(result)
 
     }
 
 
 }
+
