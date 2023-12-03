@@ -34,8 +34,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:hint="@string/buscar_hint"
-            android:padding="8dp"
-            android:contentDescription="@string/buscar_hint" />
+            android:padding="8dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_collectors"
