@@ -191,10 +191,7 @@ VYNILS_BASE_API_URL_DEBUG="http://10.0.2.2:3000/"
 
 * Finally, you can see the application 📱
 
-![Screenshot 2023-11-05 at 22 09 49](https://github.com/The-Software-Design-Company/tsdc-vynils-app/assets/10298615/64a813ff-56c9-4221-9d21-378e1be60465)
-
-
-
+![WhatsApp Image 2023-12-02 at 10 33 03 PM](https://github.com/The-Software-Design-Company/tsdc-vynils-app/assets/48004607/b762a93d-e908-4b1f-89e3-34fb1a739e67)
 
 
 
