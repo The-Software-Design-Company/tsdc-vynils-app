@@ -107,7 +107,7 @@ class AlbumDetailsActivity : AppCompatActivity() {
 
 
             val images = listOf(R.drawable.default_image, R.drawable.default_image, R.drawable.default_image)
-            val adapter = CarouselAdapter(images)
+            val adapter = CarouselAdapter(images,"Álbum")
             binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             binding.recyclerView.adapter = adapter
         }
