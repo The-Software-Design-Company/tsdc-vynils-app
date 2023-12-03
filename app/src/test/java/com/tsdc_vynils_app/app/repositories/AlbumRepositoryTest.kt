@@ -7,11 +7,14 @@ import com.tsdc_vynils_app.app.models.Album
 import com.tsdc_vynils_app.app.network.NetworkServiceAdapter
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.mockk
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import com.tsdc_vynils_app.app.models.Track
+import org.json.JSONObject
 
 
 class AlbumRepositoryTest {
@@ -56,6 +59,27 @@ class AlbumRepositoryTest {
         val result=albumRepository.refreshData()
 
         Assert.assertNotNull(result)
+
+    }
+
+    @Test
+    fun testAssociateTrackToAnAlbum() = runBlocking {
+     /*   val mockName = faker.name().toString()
+        val track = Track(1, mockName, "4:00")
+        val networkServiceAdapterMock =  mockk<NetworkServiceAdapter>()
+        val trackJson = JSONObject()
+        val mockResponse = JSONObject("{'name': '${mockName}', 'duration': '4:00'}")
+        coEvery {
+            networkServiceAdapterMock.postAssociateTrackToAlbum(any(), any())
+        } coAnswers {_, _->
+            mockResponse
+        }
+
+
+
+        val result=albumRepository()
+
+        Assert.assertNotNull(result) */
 
     }
 
